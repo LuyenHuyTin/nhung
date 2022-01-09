@@ -1,0 +1,314 @@
+m255
+K4
+z2
+!s11e vcom 2020.4 2020.10, Oct 13 2020
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 dC:/modeltech64_2020.4/examples/nhung
+Ealu
+Z1 w1641697867
+Z2 DPx4 ieee 15 std_logic_arith 0 22 [G314=:2zXJ`VORJe1J@Z1
+Z3 DPx4 ieee 18 std_logic_unsigned 0 22 ;eZjO2D4ZDz<]0>8AL<ne1
+Z4 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
+Z5 DPx4 ieee 14 std_logic_1164 0 22 cVAk:aDinOX8^VGI1ekP<3
+!i122 0
+R0
+Z6 8C:/modeltech64_2020.4/examples/nhung/alu.vhd
+Z7 FC:/modeltech64_2020.4/examples/nhung/alu.vhd
+l0
+L6 1
+VB5hMQ[oW`^LbiAITTTjUB1
+!s100 Fc=83`h7E^`KjUCXD7^FW2
+Z8 OL;C;2020.4;71
+32
+Z9 !s110 1641700954
+!i10b 1
+Z10 !s108 1641700954.000000
+Z11 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|C:/modeltech64_2020.4/examples/nhung/alu.vhd|
+Z12 !s107 C:/modeltech64_2020.4/examples/nhung/alu.vhd|
+!i113 0
+Z13 o-work work -2002 -explicit
+Z14 tExplicit 1 CvgOpt 0
+Aalu
+R2
+R3
+R4
+R5
+DEx4 work 3 alu 0 22 B5hMQ[oW`^LbiAITTTjUB1
+!i122 0
+l24
+Z15 L20 27
+VG3?:[PLcLKZaa3?;feM_U1
+!s100 33ab7;L9bd]Elz@MeP6PS2
+R8
+32
+R9
+!i10b 1
+R10
+R11
+R12
+!i113 0
+R13
+R14
+Econtroller
+Z16 w1641650682
+R2
+R3
+R4
+R5
+!i122 1
+R0
+Z17 8C:/modeltech64_2020.4/examples/nhung/Controller.vhd
+Z18 FC:/modeltech64_2020.4/examples/nhung/Controller.vhd
+l0
+L10 1
+VL92:H:XVQ4TBP0:5G1jV^1
+!s100 hn?Xb]FYRgib4ekfh;QO:0
+R8
+32
+R9
+!i10b 1
+R10
+Z19 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|C:/modeltech64_2020.4/examples/nhung/Controller.vhd|
+Z20 !s107 C:/modeltech64_2020.4/examples/nhung/Controller.vhd|
+!i113 0
+R13
+R14
+Abehavioral
+R2
+R3
+R4
+R5
+DEx4 work 10 controller 0 22 L92:H:XVQ4TBP0:5G1jV^1
+!i122 1
+l41
+L34 101
+VRgmhHo`7HM1Pd3SZA?RJR3
+!s100 8ES1S9F8FKQK6g42STjJ>0
+R8
+32
+R9
+!i10b 1
+R10
+R19
+R20
+!i113 0
+R13
+R14
+Edatapath
+Z21 w1641698392
+R4
+R5
+!i122 2
+R0
+Z22 8C:/modeltech64_2020.4/examples/nhung/Datapath.vhd
+Z23 FC:/modeltech64_2020.4/examples/nhung/Datapath.vhd
+l0
+L5 1
+V4ImBNXBz>MNR`j?;F3FR>0
+!s100 z2ScaeP;9MlSF=TQM?NmU3
+R8
+32
+R9
+!i10b 1
+R10
+Z24 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|C:/modeltech64_2020.4/examples/nhung/Datapath.vhd|
+Z25 !s107 C:/modeltech64_2020.4/examples/nhung/Datapath.vhd|
+!i113 0
+R13
+R14
+Abehavioral
+R4
+R5
+DEx4 work 8 datapath 0 22 4ImBNXBz>MNR`j?;F3FR>0
+!i122 2
+l80
+L10 74
+V7L?O<neDeXeeGL9X^KAkX3
+!s100 kOMci2WK5HFKlZdIT:ID32
+R8
+32
+R9
+!i10b 1
+R10
+R24
+R25
+!i113 0
+R13
+R14
+Einstruction_register
+Z26 w1641696161
+R4
+R5
+!i122 3
+R0
+Z27 8C:/modeltech64_2020.4/examples/nhung/IR.vhd
+Z28 FC:/modeltech64_2020.4/examples/nhung/IR.vhd
+l0
+L34 1
+Vh>4G[?fVCVA?A7THnPD^<2
+!s100 D@k]@_eYARk63Md0iGSC`1
+R8
+32
+Z29 !s110 1641700955
+!i10b 1
+R10
+Z30 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|C:/modeltech64_2020.4/examples/nhung/IR.vhd|
+Z31 !s107 C:/modeltech64_2020.4/examples/nhung/IR.vhd|
+!i113 0
+R13
+R14
+Abehavioral
+R4
+R5
+DEx4 work 20 instruction_register 0 22 h>4G[?fVCVA?A7THnPD^<2
+!i122 3
+l43
+L41 13
+VUNd2^DI8=4GBcE@5<^WNI0
+!s100 F1b@WPDDLJ=dOEnlRiX6l1
+R8
+32
+R29
+!i10b 1
+R10
+R30
+R31
+!i113 0
+R13
+R14
+Emux3to1
+Z32 w1641649983
+R4
+R5
+!i122 4
+R0
+Z33 8C:/modeltech64_2020.4/examples/nhung/Mux.vhd
+Z34 FC:/modeltech64_2020.4/examples/nhung/Mux.vhd
+l0
+L4 1
+V@Hd>ngO03eOgR>KU6oJZa0
+!s100 YM]4]AgScK8a`<fkh3:]c0
+R8
+32
+R29
+!i10b 1
+Z35 !s108 1641700955.000000
+Z36 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|C:/modeltech64_2020.4/examples/nhung/Mux.vhd|
+Z37 !s107 C:/modeltech64_2020.4/examples/nhung/Mux.vhd|
+!i113 0
+R13
+R14
+Amux3to1
+R4
+R5
+DEx4 work 7 mux3to1 0 22 @Hd>ngO03eOgR>KU6oJZa0
+!i122 4
+l13
+L12 7
+VQL1?MIaS[An4k_kd8MBDW0
+!s100 LCgGz];coICJMzKDgKN0?0
+R8
+32
+R29
+!i10b 1
+R35
+R36
+R37
+!i113 0
+R13
+R14
+Eprogram_counter
+Z38 w1641698398
+R2
+R3
+R4
+R5
+!i122 5
+R0
+Z39 8C:/modeltech64_2020.4/examples/nhung/PC.vhd
+Z40 FC:/modeltech64_2020.4/examples/nhung/PC.vhd
+l0
+L6 1
+VHiIiHOW;IUO@IGdD[:DiV1
+!s100 Zklf9`U=aXo1Z6n@elCjn1
+R8
+32
+R29
+!i10b 1
+R35
+Z41 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|C:/modeltech64_2020.4/examples/nhung/PC.vhd|
+Z42 !s107 C:/modeltech64_2020.4/examples/nhung/PC.vhd|
+!i113 0
+R13
+R14
+Aprogram_counter
+R2
+R3
+R4
+R5
+DEx4 work 15 program_counter 0 22 HiIiHOW;IUO@IGdD[:DiV1
+!i122 5
+l17
+L15 17
+V7oIUzTOOzT<4T]nLa=XkK2
+!s100 3F2V^I=OmSI<i@Z=28G0n0
+R8
+32
+R29
+!i10b 1
+R35
+R41
+R42
+!i113 0
+R13
+R14
+Eregister_tt
+Z43 w1641697311
+R2
+R3
+R4
+R5
+!i122 6
+R0
+Z44 8C:/modeltech64_2020.4/examples/nhung/Registor.vhd
+Z45 FC:/modeltech64_2020.4/examples/nhung/Registor.vhd
+l0
+L6 1
+VMLT0?zh[^GA07dkYB[E0i3
+!s100 P[>[6A51>RJ`><2^_Q1di0
+R8
+32
+R29
+!i10b 1
+R35
+Z46 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|C:/modeltech64_2020.4/examples/nhung/Registor.vhd|
+!s107 C:/modeltech64_2020.4/examples/nhung/Registor.vhd|
+!i113 0
+R13
+R14
+Aregister_tt
+R2
+R3
+R4
+R5
+DEx4 work 11 register_tt 0 22 MLT0?zh[^GA07dkYB[E0i3
+!i122 6
+l24
+R15
+V:AozD6=IC8zEo33MAFe5K3
+!s100 UVB:nH;Z:T[2mg^n6R16C0
+R8
+32
+R29
+!i10b 1
+R35
+R46
+Z47 !s107 C:/modeltech64_2020.4/examples/nhung/Registor.vhd|
+!i113 0
+R13
+R14
