@@ -3,3 +3,4 @@ work/
 *.bak
 x.mpf
 x.cr.mti
+./*.bak
