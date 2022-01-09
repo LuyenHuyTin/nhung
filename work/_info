@@ -10,16 +10,25 @@ z2
 cModel Technology
 Z0 dC:/modeltech64_2020.4/examples/nhung
 Ealu
+<<<<<<< HEAD
 Z1 w1641695266
+=======
+Z1 w1641697867
+>>>>>>> fcbc72f7061846a62aa63c3d87ee0eef1e21d708
 Z2 DPx4 ieee 15 std_logic_arith 0 22 [G314=:2zXJ`VORJe1J@Z1
 Z3 DPx4 ieee 18 std_logic_unsigned 0 22 ;eZjO2D4ZDz<]0>8AL<ne1
 Z4 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
 Z5 DPx4 ieee 14 std_logic_1164 0 22 cVAk:aDinOX8^VGI1ekP<3
+<<<<<<< HEAD
 !i122 22
+=======
+!i122 0
+>>>>>>> fcbc72f7061846a62aa63c3d87ee0eef1e21d708
 R0
 Z6 8C:/modeltech64_2020.4/examples/nhung/alu.vhd
 Z7 FC:/modeltech64_2020.4/examples/nhung/alu.vhd
 l0
+<<<<<<< HEAD
 L5 1
 Vlm5WehkRhiDOQKm6VD64C0
 !s100 W6kHMhhb^`>a`k=Fg`HXL2
@@ -28,6 +37,16 @@ Z8 OL;C;2020.4;71
 Z9 !s110 1641696218
 !i10b 1
 Z10 !s108 1641696218.000000
+=======
+L6 1
+VB5hMQ[oW`^LbiAITTTjUB1
+!s100 Fc=83`h7E^`KjUCXD7^FW2
+Z8 OL;C;2020.4;71
+32
+Z9 !s110 1641700954
+!i10b 1
+Z10 !s108 1641700954.000000
+>>>>>>> fcbc72f7061846a62aa63c3d87ee0eef1e21d708
 Z11 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|C:/modeltech64_2020.4/examples/nhung/alu.vhd|
 Z12 !s107 C:/modeltech64_2020.4/examples/nhung/alu.vhd|
 !i113 0
@@ -38,12 +57,21 @@ R2
 R3
 R4
 R5
+<<<<<<< HEAD
 DEx4 work 3 alu 0 22 lm5WehkRhiDOQKm6VD64C0
 !i122 22
 l21
 L18 25
 ViPB8XMECVmzz;Y]JX@KG<3
 !s100 Gc:PNoz=ik_>iV6O5NZ[T3
+=======
+DEx4 work 3 alu 0 22 B5hMQ[oW`^LbiAITTTjUB1
+!i122 0
+l24
+Z15 L20 27
+VG3?:[PLcLKZaa3?;feM_U1
+!s100 33ab7;L9bd]Elz@MeP6PS2
+>>>>>>> fcbc72f7061846a62aa63c3d87ee0eef1e21d708
 R8
 32
 R9
@@ -54,6 +82,7 @@ R12
 !i113 0
 R13
 R14
+<<<<<<< HEAD
 Ealu_tb
 w1641697075
 R2
@@ -113,25 +142,46 @@ OL;O;2020.4;71
 R0
 Econtroller
 Z20 w1641682002
+=======
+Econtroller
+Z16 w1641650682
+>>>>>>> fcbc72f7061846a62aa63c3d87ee0eef1e21d708
 R2
 R3
 R4
 R5
+<<<<<<< HEAD
 !i122 8
 R0
 Z21 8C:/modeltech64_2020.4/examples/nhung/Controller.vhd
 Z22 FC:/modeltech64_2020.4/examples/nhung/Controller.vhd
 l0
 R17
+=======
+!i122 1
+R0
+Z17 8C:/modeltech64_2020.4/examples/nhung/Controller.vhd
+Z18 FC:/modeltech64_2020.4/examples/nhung/Controller.vhd
+l0
+L10 1
+>>>>>>> fcbc72f7061846a62aa63c3d87ee0eef1e21d708
 VL92:H:XVQ4TBP0:5G1jV^1
 !s100 hn?Xb]FYRgib4ekfh;QO:0
 R8
 32
+<<<<<<< HEAD
 Z23 !s110 1641682086
 !i10b 1
 Z24 !s108 1641682086.000000
 Z25 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|C:/modeltech64_2020.4/examples/nhung/Controller.vhd|
 Z26 !s107 C:/modeltech64_2020.4/examples/nhung/Controller.vhd|
+=======
+R9
+!i10b 1
+R10
+Z19 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|C:/modeltech64_2020.4/examples/nhung/Controller.vhd|
+Z20 !s107 C:/modeltech64_2020.4/examples/nhung/Controller.vhd|
+>>>>>>> fcbc72f7061846a62aa63c3d87ee0eef1e21d708
 !i113 0
 R13
 R14
@@ -141,13 +191,18 @@ R3
 R4
 R5
 DEx4 work 10 controller 0 22 L92:H:XVQ4TBP0:5G1jV^1
+<<<<<<< HEAD
 !i122 8
+=======
+!i122 1
+>>>>>>> fcbc72f7061846a62aa63c3d87ee0eef1e21d708
 l41
 L34 101
 VRgmhHo`7HM1Pd3SZA?RJR3
 !s100 8ES1S9F8FKQK6g42STjJ>0
 R8
 32
+<<<<<<< HEAD
 R23
 !i10b 1
 R24
@@ -198,10 +253,18 @@ R31
 R32
 R33
 R34
+=======
+R9
+!i10b 1
+R10
+R19
+R20
+>>>>>>> fcbc72f7061846a62aa63c3d87ee0eef1e21d708
 !i113 0
 R13
 R14
 Edatapath
+<<<<<<< HEAD
 R20
 R4
 R5
@@ -209,17 +272,34 @@ R5
 R0
 Z35 8C:/modeltech64_2020.4/examples/nhung/Datapath.vhd
 Z36 FC:/modeltech64_2020.4/examples/nhung/Datapath.vhd
+=======
+Z21 w1641698392
+R4
+R5
+!i122 2
+R0
+Z22 8C:/modeltech64_2020.4/examples/nhung/Datapath.vhd
+Z23 FC:/modeltech64_2020.4/examples/nhung/Datapath.vhd
+>>>>>>> fcbc72f7061846a62aa63c3d87ee0eef1e21d708
 l0
 L5 1
 V4ImBNXBz>MNR`j?;F3FR>0
 !s100 z2ScaeP;9MlSF=TQM?NmU3
 R8
 32
+<<<<<<< HEAD
 Z37 !s110 1641696350
 !i10b 1
 Z38 !s108 1641696350.000000
 Z39 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|C:/modeltech64_2020.4/examples/nhung/Datapath.vhd|
 Z40 !s107 C:/modeltech64_2020.4/examples/nhung/Datapath.vhd|
+=======
+R9
+!i10b 1
+R10
+Z24 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|C:/modeltech64_2020.4/examples/nhung/Datapath.vhd|
+Z25 !s107 C:/modeltech64_2020.4/examples/nhung/Datapath.vhd|
+>>>>>>> fcbc72f7061846a62aa63c3d87ee0eef1e21d708
 !i113 0
 R13
 R14
@@ -227,22 +307,35 @@ Abehavioral
 R4
 R5
 DEx4 work 8 datapath 0 22 4ImBNXBz>MNR`j?;F3FR>0
+<<<<<<< HEAD
 !i122 23
+=======
+!i122 2
+>>>>>>> fcbc72f7061846a62aa63c3d87ee0eef1e21d708
 l80
 L10 74
 V7L?O<neDeXeeGL9X^KAkX3
 !s100 kOMci2WK5HFKlZdIT:ID32
 R8
 32
+<<<<<<< HEAD
 R37
 !i10b 1
 R38
 R39
 R40
+=======
+R9
+!i10b 1
+R10
+R24
+R25
+>>>>>>> fcbc72f7061846a62aa63c3d87ee0eef1e21d708
 !i113 0
 R13
 R14
 Einstruction_register
+<<<<<<< HEAD
 R20
 R4
 R5
@@ -250,17 +343,34 @@ R5
 R0
 Z41 8C:/modeltech64_2020.4/examples/nhung/IR.vhd
 Z42 FC:/modeltech64_2020.4/examples/nhung/IR.vhd
+=======
+Z26 w1641696161
+R4
+R5
+!i122 3
+R0
+Z27 8C:/modeltech64_2020.4/examples/nhung/IR.vhd
+Z28 FC:/modeltech64_2020.4/examples/nhung/IR.vhd
+>>>>>>> fcbc72f7061846a62aa63c3d87ee0eef1e21d708
 l0
 L34 1
 Vh>4G[?fVCVA?A7THnPD^<2
 !s100 D@k]@_eYARk63Md0iGSC`1
 R8
 32
+<<<<<<< HEAD
 Z43 !s110 1641693662
 !i10b 1
 Z44 !s108 1641693662.000000
 Z45 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|C:/modeltech64_2020.4/examples/nhung/IR.vhd|
 Z46 !s107 C:/modeltech64_2020.4/examples/nhung/IR.vhd|
+=======
+Z29 !s110 1641700955
+!i10b 1
+R10
+Z30 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|C:/modeltech64_2020.4/examples/nhung/IR.vhd|
+Z31 !s107 C:/modeltech64_2020.4/examples/nhung/IR.vhd|
+>>>>>>> fcbc72f7061846a62aa63c3d87ee0eef1e21d708
 !i113 0
 R13
 R14
@@ -268,13 +378,18 @@ Abehavioral
 R4
 R5
 DEx4 work 20 instruction_register 0 22 h>4G[?fVCVA?A7THnPD^<2
+<<<<<<< HEAD
 !i122 14
+=======
+!i122 3
+>>>>>>> fcbc72f7061846a62aa63c3d87ee0eef1e21d708
 l43
 L41 13
 VUNd2^DI8=4GBcE@5<^WNI0
 !s100 F1b@WPDDLJ=dOEnlRiX6l1
 R8
 32
+<<<<<<< HEAD
 R43
 !i10b 1
 R44
@@ -325,10 +440,18 @@ R50
 R51
 R52
 R53
+=======
+R29
+!i10b 1
+R10
+R30
+R31
+>>>>>>> fcbc72f7061846a62aa63c3d87ee0eef1e21d708
 !i113 0
 R13
 R14
 Emux3to1
+<<<<<<< HEAD
 R20
 R4
 R5
@@ -336,17 +459,34 @@ R5
 R0
 Z54 8C:/modeltech64_2020.4/examples/nhung/Mux.vhd
 Z55 FC:/modeltech64_2020.4/examples/nhung/Mux.vhd
+=======
+Z32 w1641649983
+R4
+R5
+!i122 4
+R0
+Z33 8C:/modeltech64_2020.4/examples/nhung/Mux.vhd
+Z34 FC:/modeltech64_2020.4/examples/nhung/Mux.vhd
+>>>>>>> fcbc72f7061846a62aa63c3d87ee0eef1e21d708
 l0
 L4 1
 V@Hd>ngO03eOgR>KU6oJZa0
 !s100 YM]4]AgScK8a`<fkh3:]c0
 R8
 32
+<<<<<<< HEAD
 Z56 !s110 1641696822
 !i10b 1
 Z57 !s108 1641696822.000000
 Z58 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|C:/modeltech64_2020.4/examples/nhung/Mux.vhd|
 Z59 !s107 C:/modeltech64_2020.4/examples/nhung/Mux.vhd|
+=======
+R29
+!i10b 1
+Z35 !s108 1641700955.000000
+Z36 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|C:/modeltech64_2020.4/examples/nhung/Mux.vhd|
+Z37 !s107 C:/modeltech64_2020.4/examples/nhung/Mux.vhd|
+>>>>>>> fcbc72f7061846a62aa63c3d87ee0eef1e21d708
 !i113 0
 R13
 R14
@@ -354,13 +494,20 @@ Amux3to1
 R4
 R5
 DEx4 work 7 mux3to1 0 22 @Hd>ngO03eOgR>KU6oJZa0
+<<<<<<< HEAD
 !i122 24
 l13
 Z60 L12 7
+=======
+!i122 4
+l13
+L12 7
+>>>>>>> fcbc72f7061846a62aa63c3d87ee0eef1e21d708
 VQL1?MIaS[An4k_kd8MBDW0
 !s100 LCgGz];coICJMzKDgKN0?0
 R8
 32
+<<<<<<< HEAD
 R56
 !i10b 1
 R57
@@ -497,30 +644,56 @@ R70
 R71
 R72
 R73
+=======
+R29
+!i10b 1
+R35
+R36
+R37
+>>>>>>> fcbc72f7061846a62aa63c3d87ee0eef1e21d708
 !i113 0
 R13
 R14
 Eprogram_counter
+<<<<<<< HEAD
 R20
+=======
+Z38 w1641698398
+>>>>>>> fcbc72f7061846a62aa63c3d87ee0eef1e21d708
 R2
 R3
 R4
 R5
+<<<<<<< HEAD
 !i122 12
 R0
 Z74 8C:/modeltech64_2020.4/examples/nhung/PC.vhd
 Z75 FC:/modeltech64_2020.4/examples/nhung/PC.vhd
+=======
+!i122 5
+R0
+Z39 8C:/modeltech64_2020.4/examples/nhung/PC.vhd
+Z40 FC:/modeltech64_2020.4/examples/nhung/PC.vhd
+>>>>>>> fcbc72f7061846a62aa63c3d87ee0eef1e21d708
 l0
 L6 1
 VHiIiHOW;IUO@IGdD[:DiV1
 !s100 Zklf9`U=aXo1Z6n@elCjn1
 R8
 32
+<<<<<<< HEAD
 R23
 !i10b 1
 R24
 Z76 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|C:/modeltech64_2020.4/examples/nhung/PC.vhd|
 Z77 !s107 C:/modeltech64_2020.4/examples/nhung/PC.vhd|
+=======
+R29
+!i10b 1
+R35
+Z41 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|C:/modeltech64_2020.4/examples/nhung/PC.vhd|
+Z42 !s107 C:/modeltech64_2020.4/examples/nhung/PC.vhd|
+>>>>>>> fcbc72f7061846a62aa63c3d87ee0eef1e21d708
 !i113 0
 R13
 R14
@@ -530,13 +703,18 @@ R3
 R4
 R5
 DEx4 work 15 program_counter 0 22 HiIiHOW;IUO@IGdD[:DiV1
+<<<<<<< HEAD
 !i122 12
+=======
+!i122 5
+>>>>>>> fcbc72f7061846a62aa63c3d87ee0eef1e21d708
 l17
 L15 17
 V7oIUzTOOzT<4T]nLa=XkK2
 !s100 3F2V^I=OmSI<i@Z=28G0n0
 R8
 32
+<<<<<<< HEAD
 R23
 !i10b 1
 R24
@@ -587,30 +765,56 @@ R81
 R82
 R83
 Z84 !s107 C:/modeltech64_2020.4/examples/nhung/registor_tb.vhd|
+=======
+R29
+!i10b 1
+R35
+R41
+R42
+>>>>>>> fcbc72f7061846a62aa63c3d87ee0eef1e21d708
 !i113 0
 R13
 R14
 Eregister_tt
+<<<<<<< HEAD
 R20
+=======
+Z43 w1641697311
+>>>>>>> fcbc72f7061846a62aa63c3d87ee0eef1e21d708
 R2
 R3
 R4
 R5
+<<<<<<< HEAD
 !i122 13
 R0
 Z85 8C:/modeltech64_2020.4/examples/nhung/Registor.vhd
 Z86 FC:/modeltech64_2020.4/examples/nhung/Registor.vhd
+=======
+!i122 6
+R0
+Z44 8C:/modeltech64_2020.4/examples/nhung/Registor.vhd
+Z45 FC:/modeltech64_2020.4/examples/nhung/Registor.vhd
+>>>>>>> fcbc72f7061846a62aa63c3d87ee0eef1e21d708
 l0
 L6 1
 VMLT0?zh[^GA07dkYB[E0i3
 !s100 P[>[6A51>RJ`><2^_Q1di0
 R8
 32
+<<<<<<< HEAD
 R23
 !i10b 1
 R24
 Z87 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|C:/modeltech64_2020.4/examples/nhung/Registor.vhd|
 Z88 !s107 C:/modeltech64_2020.4/examples/nhung/Registor.vhd|
+=======
+R29
+!i10b 1
+R35
+Z46 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|C:/modeltech64_2020.4/examples/nhung/Registor.vhd|
+!s107 C:/modeltech64_2020.4/examples/nhung/Registor.vhd|
+>>>>>>> fcbc72f7061846a62aa63c3d87ee0eef1e21d708
 !i113 0
 R13
 R14
@@ -620,18 +824,32 @@ R3
 R4
 R5
 DEx4 work 11 register_tt 0 22 MLT0?zh[^GA07dkYB[E0i3
+<<<<<<< HEAD
 !i122 13
 l24
 L20 27
+=======
+!i122 6
+l24
+R15
+>>>>>>> fcbc72f7061846a62aa63c3d87ee0eef1e21d708
 V:AozD6=IC8zEo33MAFe5K3
 !s100 UVB:nH;Z:T[2mg^n6R16C0
 R8
 32
+<<<<<<< HEAD
 R23
 !i10b 1
 R24
 R87
 R88
+=======
+R29
+!i10b 1
+R35
+R46
+Z47 !s107 C:/modeltech64_2020.4/examples/nhung/Registor.vhd|
+>>>>>>> fcbc72f7061846a62aa63c3d87ee0eef1e21d708
 !i113 0
 R13
 R14
