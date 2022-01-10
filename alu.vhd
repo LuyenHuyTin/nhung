@@ -16,36 +16,36 @@ architecture behav of alu is
     component mux4to1
     GENERIC ( 
              DATA_WIDTH : integer := 16);
-    PORT (w0, w1, w2, w3: IN  std_logic_vector (DATA_WIDTH-1 downto 0);
+    PORT (input1, input2, input3, input4: IN  std_logic_vector (DATA_WIDTH-1 downto 0);
          SEL : IN 	std_logic_vector (1 downto 0);
          Z: OUT std_logic_vector (DATA_WIDTH-1 downto 0)
                 );
     END component;
  signal a : std_logic_vector(16 - 1 downto 0) := x"0000";
  signal b : std_logic_vector(16 - 1 downto 0) := x"0000";
- signal w0 : std_logic_vector(16 - 1 downto 0) ;
- signal w1 : std_logic_vector(16 - 1 downto 0) ;
- signal w2 : std_logic_vector(16 - 1 downto 0) ;
- signal w3 : std_logic_vector(16 - 1 downto 0) ;
+ signal input1 : std_logic_vector(16 - 1 downto 0) ;
+ signal input2 : std_logic_vector(16 - 1 downto 0) ;
+ signal input3 : std_logic_vector(16 - 1 downto 0) ;
+ signal input4 : std_logic_vector(16 - 1 downto 0) ;
 --  signal ALUs : std_logic_vector(1 downto 0) ;
 --  signal ALUz : std_logic;
 --  signal ALUr : std_logic_vector(DATA_WIDTH downto 0);
 begin
     mux : mux4to1
     port map(
-        w0 => w0,
-        w1 => w1,
-        w2 => w2,
-        w3 => w3,
+        input1 => input1,
+        input2 => input2,
+        input3 => input3,
+        input4 => input4,
         SEL => ALUs,
         Z => ALUr
     );
     a <= OPr1;
     b <= Opr2;
-    w0 <= a+b;
-    w1 <= a - b;
-    w2 <= a or b;
-    w3 <= a and b;
+    input1 <= a+b;
+    input2 <= a - b;
+    input3 <= a or b;
+    input4 <= a and b;
     ALUz <= '1' when  OPr1 = X"0000" else
             '0';    
 

@@ -19,7 +19,7 @@ architecture behav of cpu_tb is
              Mre_t :  out std_logic;
              Mwe_t :  out std_logic;
             --
-             data_out_mem_t :out std_logic_vector(15 downto 0); -- noi voi w2 datapath va ir_in 
+             data_out_mem_t :out std_logic_vector(15 downto 0); -- noi voi input3 datapath va ir_in 
              data_in_mem_t :  out std_logic_vector(15 downto 0); -- tuong duong data out cua datapath
             -- 
              RFs_t : out STD_LOGIC_VECTOR(1 downto 0);
@@ -62,7 +62,7 @@ architecture behav of cpu_tb is
     signal Mre_t :  std_logic;
     signal Mwe_t :  std_logic;
 --
-    signal data_out_mem_t : std_logic_vector(15 downto 0); -- noi voi w2 datapath va ir_in 
+    signal data_out_mem_t : std_logic_vector(15 downto 0); -- noi voi input3 datapath va ir_in 
     signal data_in_mem_t :   std_logic_vector(15 downto 0); -- tuong duong data out cua datapath
 
 -- 

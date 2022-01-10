@@ -5,7 +5,7 @@ use ieee.std_logic_unsigned.all;
 -------------------------------------------------------------------------------
 -- Synchronous Dual Port Memory
 -------------------------------------------------------------------------------
-entity dpmem is
+entity memory is
   generic (
     DATA_WIDTH        :     integer   := 16;     -- Word Width
     ADDR_WIDTH        :     integer   := 16      -- Address width
@@ -25,9 +25,9 @@ entity dpmem is
     Dataout           : out std_logic_vector(DATA_WIDTH -1 downto 0)   -- Output data
     
     );
-end dpmem;
+end memory;
  
-architecture dpmem_arch of dpmem is
+architecture memory_architecture of memory is
    
   type DATA_ARRAY is array (integer range <>) of std_logic_vector(DATA_WIDTH -1 downto 0); -- Memory Type
   signal   M       :     DATA_ARRAY(0 to (2**ADDR_WIDTH) -1) := (others => (others => '0'));  -- Memory model
@@ -81,4 +81,4 @@ begin  -- dpmem_arch
       end if;
   end process  RW_Proc;
      
-end dpmem_arch;
+end memory_architecture;

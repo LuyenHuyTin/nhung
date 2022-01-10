@@ -6,19 +6,18 @@ USE ieee.numeric_std.all ;
 use IEEE.std_logic_unsigned.all;
 --use work.Sys_Definition.all;
 
-ENTITY mux4to1 IS
+ENTITY mux IS
    GENERIC ( DATA_WIDTH : integer := 16);
-   PORT (w0, w1, w2, w3: IN  std_logic_vector (DATA_WIDTH-1 downto 0);
+   PORT (input1, input2, input3, input4: IN  std_logic_vector (DATA_WIDTH-1 downto 0);
         SEL : IN 	 std_logic_vector (1 downto 0);
         Z: OUT 	std_logic_vector (DATA_WIDTH-1 downto 0));
-END mux4to1;
-ARCHITECTURE bev OF mux4to1 IS
+END mux;
+ARCHITECTURE bev OF mux IS
 BEGIN
-    -- write your code here
     with sel select
-    z <= w0 when "00",
-        w1 when "01",
-        w2 when "10",
-        w3 when others;
+    z <= input1 when "00",
+        input2 when "01",
+        input3 when "10",
+        input4 when others;
 END bev;
 

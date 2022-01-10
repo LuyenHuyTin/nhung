@@ -10,29 +10,22 @@ entity datapath is
     DATA_WIDTH : integer   := 16;     -- Data Width
     ADDR_WIDTH : integer   := 4     -- Address width
     );
-   port ( -- you will need to add more ports here as design grows
-          rst     : in STD_LOGIC;
-          clk     : in STD_LOGIC;
-          --
-        --w0 <=> ALUr
-	        imm     : in std_logic_vector(7 downto 0); -- w1 <=> imm
-	        w2      : in std_logic_vector(DATA_WIDTH -1 downto 0); -- w2 <=> data_out
-          RFs : in std_logic_vector(1 downto 0);
-
-          --
+   port ( 
+        rst     : in STD_LOGIC;
+        clk     : in STD_LOGIC;
+        imm     : in std_logic_vector(7 downto 0); 
+        input3      : in std_logic_vector(DATA_WIDTH -1 downto 0); 
+        RFs : in std_logic_vector(1 downto 0);
         ALUs : in std_logic_vector(1 downto 0);
         ALUz : out std_logic;
-        --
-      RFwa : in std_logic_vector(3 downto 0);
-      RFwe : in std_logic;
-      OPr1a : in std_logic_vector(3 downto 0);
-      OPr1e : in std_logic;
-      OPr2a : in std_logic_vector(3 downto 0);
-      OPr2e : in std_logic;
-      add_out : out std_logic_vector(15 downto 0);
-      data_out : out std_logic_vector(15 downto 0)
-      -- de test alu
-      --ALU_out : out std_logic_vector(15 downto 0)
+        RFwa : in std_logic_vector(3 downto 0);
+        RFwe : in std_logic;
+        OPr1a : in std_logic_vector(3 downto 0);
+        OPr1e : in std_logic;
+        OPr2a : in std_logic_vector(3 downto 0);
+        OPr2e : in std_logic;
+        add_out : out std_logic_vector(15 downto 0);
+        data_out : out std_logic_vector(15 downto 0)
         );
 end datapath;
 
@@ -51,7 +44,7 @@ end component;
 -- mux 4 -> 1 
 component mux4to1
    GENERIC ( DATA_WIDTH : integer := 16);
-   PORT (w0, w1, w2, w3: IN  	std_logic_vector (DATA_WIDTH-1 downto 0);
+   PORT (input1, input2, input3, input4: IN  	std_logic_vector (DATA_WIDTH-1 downto 0);
         SEL : IN 	 std_logic_vector (1 downto 0);
         Z: OUT 	std_logic_vector (DATA_WIDTH-1 downto 0)
                );
@@ -78,18 +71,18 @@ end component;
 
 signal ALUr : std_logic_vector(15 downto 0);
 signal RFin : std_logic_vector(15 downto 0);
-signal w3 : std_logic_vector(15 downto 0) := x"0000";
+signal input4 : std_logic_vector(15 downto 0) := x"0000";
 
 signal o1 : std_logic_vector(15 downto 0);
 signal o2 : std_logic_vector(15 downto 0);
-signal w1 : std_logic_vector(15 downto 0);
+signal input2 : std_logic_vector(15 downto 0);
 
 begin
 -- write your code here
   -- MUX_U: MUX4to1 port map(?);
-	w1 <= x"00"& imm;
+	input2 <= x"00"& imm;
   mux : mux4to1
-  port map(ALUr, w1, w2, w3, RFs, RFin);
+  port map(ALUr, input2, input3, input4, RFs, RFin);
   --RF_U: REG_FILE port map (?);
   rf_u : register_file
   port map(rst,clk,RFin,RFwa,RFwe,OPr1a,OPr1e,OPr2a,OPr2e,o1,o2);
