@@ -8,7 +8,7 @@ use ieee.STD_LOGIC_UNSIGNED.all;
 --use alu.all;
  
 entity mux_tb is
-	GENERIC(DATA_WIDTH: integer := 16; ADDR_WIDTH: integer := 16);
+	GENERIC(DATA_WIDTH: integer := 16; ADDR_WIDTH: integer :=4);
 end mux_tb;
 
  

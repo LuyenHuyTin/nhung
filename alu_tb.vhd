@@ -63,5 +63,5 @@ begin
   end process stimuli_proc;
    
  
-
 end behavior;
+--vopt  +acc + alu_tb -o alu_tb_opt

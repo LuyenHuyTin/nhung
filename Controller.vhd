@@ -53,7 +53,6 @@ begin
                 when RESET_S =>
                             state <= FETCH;
                 when FETCH =>
-                         
                             state <= FETCHa;
                 when FETCHa =>
                              state <= FETCHb;
@@ -115,21 +114,21 @@ begin
     end process;
 
 
- PCClr <= '1' WHEN (State =  RESET_S) ELSE '0';
- PCincr <= '1' WHEN (State = Fetchb) else '0';
- PCLd <= ALUz WHEN (State = JZa) ELSE '0';
- IRld <= '1' WHEN (state = Fetchb) ELSE '0';
- WITH State Select Addr_sel <= "10" WHEN Fetch,"01" WHEN MOV1|MOV2a,"00" WHEN MOV3a,"11" WHEN others ;
- WITH State Select Mre <= '1' WHEN Fetch|MOV1, '0' WHEN others ;
- WITH State Select Mwe <= '1' WHEN MOV2a|MOV3a, '0' WHEN others ;
- WITH State Select  RFs <= "10" WHEN MOV1a,"01" WHEN MOv4, "00" WHEN ADDb|SUBa, "11" WHEN others;
-WITH State Select   RFwe <= '1' WHEN MOV1a|MOv4|ADDb|SUBa, '0' WHEN Others;
-WITH State Select   RFwa <= rn WHEN MOV1a|MOv4|ADDb|SUBa, "0000" WHEN Others;
-WITH State Select   OPr1e <= '1' WHEN MOV2|MOV3|ADD|SUB|JZ,'0' WHEN OTHERS;
-WITH State Select   OPr1a <= rn WHEN MOV2|MOV3|ADD|SUB|JZ,"0000" WHEN OTHERS;
-WITH State Select   OPr2e <= '1' WHEN MOV3|ADD|SUB,'0' WHEN OTHERS;
-WITH State Select   OPr2a <= rm WHEN MOV3|ADD|SUB,"0000" WHEN OTHERS;
-WITH State Select   ALUs <= "00" WHEN ADDa|ADDb,"01" WHEN SUB|SUBa,"10" WHEN OR_S,"11" WHEN others;
+    PCClr <= '1' WHEN (State =  RESET_S) ELSE '0';
+    PCincr <= '1' WHEN (State = Fetchb) else '0';
+    PCLd <= ALUz WHEN (State = JZa) ELSE '0';
+    IRld <= '1' WHEN (state = Fetchb) ELSE '0';
+    WITH State Select Addr_sel <= "10" WHEN Fetch,"01" WHEN MOV1|MOV2a,"00" WHEN MOV3a,"11" WHEN others ;
+    WITH State Select Mre <= '1' WHEN Fetch|MOV1, '0' WHEN others ;
+    WITH State Select Mwe <= '1' WHEN MOV2a|MOV3a, '0' WHEN others ;
+    WITH State Select  RFs <= "10" WHEN MOV1a,"01" WHEN MOv4, "00" WHEN ADDb|SUBa, "11" WHEN others;
+    WITH State Select   RFwe <= '1' WHEN MOV1a|MOv4|ADDb|SUBa, '0' WHEN Others;
+    WITH State Select   RFwa <= rn WHEN MOV1a|MOv4|ADDb|SUBa, "0000" WHEN Others;
+    WITH State Select   OPr1e <= '1' WHEN MOV2|MOV3|ADD|SUB|JZ,'0' WHEN OTHERS;
+    WITH State Select   OPr1a <= rn WHEN MOV2|MOV3|ADD|SUB|JZ,"0000" WHEN OTHERS;
+    WITH State Select   OPr2e <= '1' WHEN MOV3|ADD|SUB,'0' WHEN OTHERS;
+    WITH State Select   OPr2a <= rm WHEN MOV3|ADD|SUB,"0000" WHEN OTHERS;
+    WITH State Select   ALUs <= "00" WHEN ADDa|ADDb,"01" WHEN SUB|SUBa,"10" WHEN OR_S,"11" WHEN others;
 
 end Behavioral;
 

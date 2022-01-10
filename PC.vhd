@@ -4,12 +4,23 @@ use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.STD_LOGIC_UNSIGNED.ALL;
 
 entity program_counter is
-    Port ( clk : in STD_LOGIC;
-           PCclr : in STD_LOGIC;
-           PCincr : in STD_LOGIC;
-           PCld : in STD_LOGIC;
-           PC_in : in STD_LOGIC_VECTOR (15 downto 0);
-           PC_out : out STD_LOGIC_VECTOR (15 downto 0));
+    Port (I_clk : in  STD_LOGIC;
+			I_reset : in  STD_LOGIC;
+			I_halt : in  STD_LOGIC;
+			
+			I_int: in STD_LOGIC;
+			O_int_ack: out STD_LOGIC;
+
+			-- new memory interface
+			MEM_I_ready : IN  std_logic;
+			MEM_O_cmd : OUT  std_logic;
+			MEM_O_we : OUT  std_logic;
+			MEM_O_byteEnable : OUT  std_logic_vector(1 downto 0);
+			MEM_O_addr : OUT  std_logic_vector(15 downto 0);
+			MEM_O_data : OUT  std_logic_vector(15 downto 0);
+			MEM_I_data : IN  std_logic_vector(15 downto 0);
+			MEM_I_dataReady : IN  std_logic
+	);
 end program_counter;
 
 architecture program_counter of program_counter is

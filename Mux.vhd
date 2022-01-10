@@ -3,8 +3,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 
 entity Mux_tt is
 GENERIC(DATA_WIDTH : integer := 16);
-    port( 
-	data_in0, data_in1, data_in2 : in STD_LOGIC_VECTOR (DATA_WIDTH - 1 downto 0);
+    port(data_in0, data_in1, data_in2 : in STD_LOGIC_VECTOR (DATA_WIDTH - 1 downto 0);
     	sel : in STD_LOGIC_VECTOR (1 downto 0);
     	data_out : out STD_LOGIC_VECTOR (DATA_WIDTH - 1 downto 0)
     );

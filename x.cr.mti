@@ -1,32 +1,38 @@
-C:/modeltech64_2020.4/examples/nhung/registor_tb.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none C:/modeltech64_2020.4/examples/nhung/registor_tb.vhd
+C:/modeltech64_2020.4/examples/nhung/alu.vhd {2 {vcom -work work -2002 -explicit -vopt -stats=none C:/modeltech64_2020.4/examples/nhung/alu.vhd
 Model Technology ModelSim SE-64 vcom 2020.4 Compiler 2020.10 Oct 13 2020
 -- Loading package STANDARD
 -- Loading package TEXTIO
 -- Loading package std_logic_1164
 -- Loading package std_logic_arith
 -- Loading package STD_LOGIC_UNSIGNED
--- Compiling entity register_tb
--- Compiling architecture behavior of register_tb
+-- Compiling entity ALU
+** Warning: C:/modeltech64_2020.4/examples/nhung/alu.vhd(12): (vcom-1207) An abstract literal and an identifier must have a separator between them.
+-- Compiling architecture ALU of ALU
 
-} {} {}} C:/modeltech64_2020.4/examples/nhung/ir_tb.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none {C:\modeltech64_2020.4\examples\nhung\ir_tb.vhd}
+} {} {}} C:/modeltech64_2020.4/examples/nhung/Mux.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none C:/modeltech64_2020.4/examples/nhung/Mux.vhd
 Model Technology ModelSim SE-64 vcom 2020.4 Compiler 2020.10 Oct 13 2020
 -- Loading package STANDARD
 -- Loading package TEXTIO
 -- Loading package std_logic_1164
--- Loading package std_logic_arith
--- Loading package STD_LOGIC_UNSIGNED
--- Compiling entity ir_tb
--- Compiling architecture behavior of ir_tb
+-- Compiling entity Mux_tt
+-- Compiling architecture Mux_tt of Mux_tt
 
-} {} {}} C:/modeltech64_2020.4/examples/nhung/pc_tb.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none {C:\modeltech64_2020.4\examples\nhung\pc_tb.vhd}
+} {} {}} C:/modeltech64_2020.4/examples/nhung/IR.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none C:/modeltech64_2020.4/examples/nhung/IR.vhd
 Model Technology ModelSim SE-64 vcom 2020.4 Compiler 2020.10 Oct 13 2020
 -- Loading package STANDARD
 -- Loading package TEXTIO
 -- Loading package std_logic_1164
--- Loading package std_logic_arith
--- Loading package STD_LOGIC_UNSIGNED
--- Compiling entity pc_tb
--- Compiling architecture behavior of pc_tb
+-- Compiling entity instruction_register
+-- Compiling architecture Behavioral of instruction_register
+
+} {} {}} C:/modeltech64_2020.4/examples/nhung/Mux2.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none {C:\modeltech64_2020.4\examples\nhung\Mux2.vhd}
+Model Technology ModelSim SE-64 vcom 2020.4 Compiler 2020.10 Oct 13 2020
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling entity Mux2_tt
+-- Compiling architecture Mux2_tt of Mux_tt
+-- Loading entity Mux_tt
 
 } {} {}} C:/modeltech64_2020.4/examples/nhung/Controller.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none C:/modeltech64_2020.4/examples/nhung/Controller.vhd
 Model Technology ModelSim SE-64 vcom 2020.4 Compiler 2020.10 Oct 13 2020
@@ -48,42 +54,19 @@ Model Technology ModelSim SE-64 vcom 2020.4 Compiler 2020.10 Oct 13 2020
 -- Compiling entity mux_tb
 -- Compiling architecture behavior of mux_tb
 
-} {} {}} C:/modeltech64_2020.4/examples/nhung/alu_tb.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none {C:\modeltech64_2020.4\examples\nhung\alu_tb.vhd}
+} {} {}} C:/modeltech64_2020.4/examples/nhung/cpu.vhd {0 {vcom -work work -2002 -explicit -vopt -stats=none C:/modeltech64_2020.4/examples/nhung/cpu.vhd
 Model Technology ModelSim SE-64 vcom 2020.4 Compiler 2020.10 Oct 13 2020
 -- Loading package STANDARD
 -- Loading package TEXTIO
 -- Loading package std_logic_1164
--- Loading package std_logic_arith
--- Loading package STD_LOGIC_UNSIGNED
--- Compiling entity alu_tb
--- Compiling architecture behavior of alu_tb
+-- Compiling entity Cpu
+-- Compiling architecture Behavioral of Cpu
+** Error: C:/modeltech64_2020.4/examples/nhung/cpu.vhd(72): Cannot read output "OPr1".
+	VHDL 2008 allows reading outputs.
+	This facility is enabled by compiling with -2008.
+** Error: C:/modeltech64_2020.4/examples/nhung/cpu.vhd(72): Cannot read output "OPr2".
+	VHDL 2008 allows reading outputs.
+	This facility is enabled by compiling with -2008.
+** Note: C:/modeltech64_2020.4/examples/nhung/cpu.vhd(95): VHDL Compiler exiting
 
-} {} {}} C:/modeltech64_2020.4/examples/nhung/Registor.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none C:/modeltech64_2020.4/examples/nhung/Registor.vhd
-Model Technology ModelSim SE-64 vcom 2020.4 Compiler 2020.10 Oct 13 2020
--- Loading package STANDARD
--- Loading package TEXTIO
--- Loading package std_logic_1164
--- Loading package std_logic_arith
--- Loading package STD_LOGIC_UNSIGNED
--- Compiling entity register_tt
--- Compiling architecture register_tt of register_tt
-
-} {} {}} C:/modeltech64_2020.4/examples/nhung/PC.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none C:/modeltech64_2020.4/examples/nhung/PC.vhd
-Model Technology ModelSim SE-64 vcom 2020.4 Compiler 2020.10 Oct 13 2020
--- Loading package STANDARD
--- Loading package TEXTIO
--- Loading package std_logic_1164
--- Loading package std_logic_arith
--- Loading package STD_LOGIC_UNSIGNED
--- Compiling entity program_counter
--- Compiling architecture program_counter of program_counter
-
-} {} {}} C:/modeltech64_2020.4/examples/nhung/Datapath.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none C:/modeltech64_2020.4/examples/nhung/Datapath.vhd
-Model Technology ModelSim SE-64 vcom 2020.4 Compiler 2020.10 Oct 13 2020
--- Loading package STANDARD
--- Loading package TEXTIO
--- Loading package std_logic_1164
--- Compiling entity Datapath
--- Compiling architecture Behavioral of Datapath
-
-} {} {}}
+} {8.0 9.0 11.0 12.0} {}}
