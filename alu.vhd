@@ -40,7 +40,7 @@ BEGIN
     );
     num1 <= OPr1;
     num2 <= Opr2;
-    input1 <= num1 + num2b;
+    input1 <= num1 + num2;
     input2 <= num1 - num2;
     input3 <= num1 OR num2;
     input4 <= num1 AND num2;

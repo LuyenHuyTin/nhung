@@ -23,18 +23,17 @@ architecture memory_architecture of memory is
    
   type DATA_ARRAY is array (integer range <>) of std_logic_vector(DATA_WIDTH -1 downto 0);
   signal   M       :     DATA_ARRAY(0 to (2**ADDR_WIDTH) -1) := (others => (others => '0'));  
-  constant PM_Size : Integer := 4;
-  constant PM : DATA_ARRAY(0 to (2**PM_Size) - 1) := (	
-    X"3163",	
-    X"1164",		
-    X"3A58",   
-    X"4A10",   
-    X"8A10",   
-    X"0000",    
-    X"0000",   
-    X"0000",    
-    X"0000",   
-    X"0000",   
+  constant codes : DATA_ARRAY(0 to 15) := (	
+    X"0119",	-- mov1 rf(1) = M(19)
+    X"1119",	-- mov2 M(19) = rf(1)
+    X"2110",  -- mov3 M((rm==1)) = (rn==2)
+    X"3219",  -- mov4 RF(2) = 19(hex)
+    X"4220",  -- add RF(2) = RF(2) + RF(2)
+    X"5220",  -- subRF(2) = RF(2) - RF(2)
+    X"6205",  -- jz RF(2) addr = 5
+    X"7210",  -- or  RF(2) = RF(2) or RF(1)
+    X"8210",  -- and  RF(2) = RF(2) and RF(1)
+    X"9105",   -- jmp rn =1  addr = 5
     others => x"0000");
   signal en : std_logic;
 begin  
@@ -42,7 +41,7 @@ begin
 	
   check_addr : process(addr)
   begin 
-    if(conv_integer(addr) >= (2**PM_Size) and conv_integer(addr) <= (2**ADDR_WIDTH) -1) then
+    if(conv_integer(addr) >= (9) and conv_integer(addr) <= (2**ADDR_WIDTH) -1) then
       en <= '1';
     else
       en <= '0';
@@ -53,7 +52,7 @@ begin
   begin  
     if Reset = '1' then
           Dataout <= (others => '0');
-          M(0 to (2**PM_Size)-1) <= PM; 
+          M(0 to 15) <= codes; 
     elsif (clk'event and clk = '1') then   
         if Wen = '1' and en = '1' then
 			   M(conv_integer(addr))      <= Datain; 
