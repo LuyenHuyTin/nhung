@@ -79,7 +79,7 @@ architecture behav of control_unit is
     component mux 
         PORT (
             input1, input2, input3, input4: IN  std_logic_vector (DATA_WIDTH-1 downto 0);
-            SEL : IN 	 std_logic_vector (1 downto 0);
+            SELECTION : IN 	 std_logic_vector (1 downto 0);
             Z: OUT 	std_logic_vector (DATA_WIDTH-1 downto 0));
     END component;
 
@@ -144,7 +144,7 @@ begin
             input2 => IRout_mux,
             input3 => PCout,
             input4 => input4,
-            SEL => addr_Ms,
+            SELECTION => addr_Ms,
             Z => ADDR);
     op <= IRout(DATA_WIDTH-1 downto 12);
     IRout_to_dp <= IRout(7 downto 0);

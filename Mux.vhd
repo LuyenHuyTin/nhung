@@ -9,12 +9,12 @@ use IEEE.std_logic_unsigned.all;
 ENTITY mux IS
    GENERIC ( DATA_WIDTH : integer := 16);
    PORT (input1, input2, input3, input4: IN  std_logic_vector (DATA_WIDTH-1 downto 0);
-        SEL : IN 	 std_logic_vector (1 downto 0);
+        SELECTION : IN 	 std_logic_vector (1 downto 0);
         Z: OUT 	std_logic_vector (DATA_WIDTH-1 downto 0));
 END mux;
 ARCHITECTURE bev OF mux IS
 BEGIN
-    with sel select
+    with SELECTION select
     z <= input1 when "00",
         input2 when "01",
         input3 when "10",

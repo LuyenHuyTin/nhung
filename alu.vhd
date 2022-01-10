@@ -13,11 +13,11 @@ entity alu is
 end alu;
 
 architecture behav of alu is
-    component mux4to1
+    component mux
     GENERIC ( 
              DATA_WIDTH : integer := 16);
     PORT (input1, input2, input3, input4: IN  std_logic_vector (DATA_WIDTH-1 downto 0);
-         SEL : IN 	std_logic_vector (1 downto 0);
+         SELECTION : IN 	std_logic_vector (1 downto 0);
          Z: OUT std_logic_vector (DATA_WIDTH-1 downto 0)
                 );
     END component;
@@ -31,13 +31,13 @@ architecture behav of alu is
 --  signal ALUz : std_logic;
 --  signal ALUr : std_logic_vector(DATA_WIDTH downto 0);
 begin
-    mux : mux4to1
+    uut_mux : mux
     port map(
         input1 => input1,
         input2 => input2,
         input3 => input3,
         input4 => input4,
-        SEL => ALUs,
+        SELECTION => ALUs,
         Z => ALUr
     );
     a <= OPr1;

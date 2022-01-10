@@ -9,19 +9,19 @@ entity cpu is
     port(
         clk : in std_logic;
         reset : in std_logic;
-        address_t : out std_logic_vector(15 downto 0);
+        address_t : out std_logic_vector(DATA_WIDTH - 1 downto 0);
         imm_t : out std_logic_vector(7 downto 0);
-        OPr2_t :  out std_logic_vector(15 downto 0);
+        OPr2_t :  out std_logic_vector(DATA_WIDTH - 1 downto 0);
         Mre_t :  out std_logic;
         Mwe_t :  out std_logic;
-        data_out_mem_t :out std_logic_vector(15 downto 0); 
-        data_in_mem_t :  out std_logic_vector(15 downto 0); 
+        data_out_mem_t :out std_logic_vector(DATA_WIDTH - 1 downto 0); 
+        data_in_mem_t :  out std_logic_vector(DATA_WIDTH - 1 downto 0); 
         RFs_t : out STD_LOGIC_VECTOR(1 downto 0);
-        RFwa_t : out STD_LOGIC_VECTOR(4 - 1 downto 0);
+        RFwa_t : out STD_LOGIC_VECTOR(ADDR_WIDTH- 1 downto 0);
         RFwe_t : out STD_LOGIC;
-        OPr1a_t : out STD_LOGIC_VECTOR(4 - 1 downto 0);
+        OPr1a_t : out STD_LOGIC_VECTOR(ADDR_WIDTH- 1 downto 0);
         OPr1e_t : out STD_LOGIC;
-        OPr2a_t : out STD_LOGIC_VECTOR(4 - 1 downto 0);
+        OPr2a_t : out STD_LOGIC_VECTOR(ADDR_WIDTH- 1 downto 0);
         OPr2e_t : out STD_LOGIC;
         ALUs_t : out STD_LOGIC_VECTOR(1 downto 0);
         ALUz_t : out STD_LOGIC;
@@ -30,7 +30,7 @@ entity cpu is
         PC_clr_t : out STD_LOGIC;
         PC_ld_t : out STD_LOGIC;
         IR_ld_t : out STD_LOGIC;
-        op_t : out STD_LOGIC_VECTOR(3 downto 0)
+        op_t : out STD_LOGIC_VECTOR(ADDR_WIDTH -1 downto 0)
     );
    
 
@@ -43,8 +43,8 @@ architecture behav of cpu is
           reset : in STD_LOGIC; 
           clk : in STD_LOGIC; 
           ALUz : in STD_LOGIC;
-          addr_in : in STD_LOGIC_VECTOR(16 - 1 downto 0);
-          ir_data_in : in STD_LOGIC_VECTOR(16 - 1 downto 0);
+          addr_in : in STD_LOGIC_VECTOR(DATA_WIDTH- 1 downto 0);
+          ir_data_in : in STD_LOGIC_VECTOR(DATA_WIDTH- 1 downto 0);
           RFs : out STD_LOGIC_VECTOR(1 downto 0);
           RFwa : out STD_LOGIC_VECTOR(ADDR_WIDTH - 1 downto 0);
           RFwe : out STD_LOGIC;
@@ -53,7 +53,7 @@ architecture behav of cpu is
           OPr2a : out STD_LOGIC_VECTOR(ADDR_WIDTH - 1 downto 0);
           OPr2e : out STD_LOGIC;
           ALUs : out STD_LOGIC_VECTOR(1 downto 0);
-          ADDR : out STD_LOGIC_VECTOR(16 - 1 downto 0);
+          ADDR : out STD_LOGIC_VECTOR(DATA_WIDTH- 1 downto 0);
           Mre : out STD_LOGIC;
           Mwe : out STD_LOGIC;
           imm : out STD_LOGIC_VECTOR(8 - 1 downto 0);
@@ -62,12 +62,11 @@ architecture behav of cpu is
           PC_clr : out STD_LOGIC;
           PC_ld : out STD_LOGIC;
           IR_ld : out STD_LOGIC;
-          op : out STD_LOGIC_VECTOR(3 downto 0)
+          op : out STD_LOGIC_VECTOR(ADDR_WIDTH -1 downto 0)
         );
        end component;
 
        component datapath 
-        
          port ( 
             rst     : in STD_LOGIC;
             clk     : in STD_LOGIC;
@@ -76,14 +75,14 @@ architecture behav of cpu is
             RFs : in std_logic_vector(1 downto 0);
             ALUs : in std_logic_vector(1 downto 0);
             ALUz : out std_logic;
-            RFwa : in std_logic_vector(3 downto 0);
+            RFwa : in std_logic_vector(ADDR_WIDTH -1 downto 0);
             RFwe : in std_logic;
-            OPr1a : in std_logic_vector(3 downto 0);
+            OPr1a : in std_logic_vector(ADDR_WIDTH -1 downto 0);
             OPr1e : in std_logic;
-            OPr2a : in std_logic_vector(3 downto 0);
+            OPr2a : in std_logic_vector(ADDR_WIDTH -1 downto 0);
             OPr2e : in std_logic;
-            add_out : out std_logic_vector(15 downto 0);
-            data_out : out std_logic_vector(15 downto 0));
+            add_out : out std_logic_vector(DATA_WIDTH - 1 downto 0);
+            data_out : out std_logic_vector(DATA_WIDTH - 1 downto 0));
       end component;
 
       -- memory
@@ -91,7 +90,7 @@ architecture behav of cpu is
         port (
           Clk: in  std_logic;       
           Reset : in  std_logic; 
-          addr: in  std_logic_vector(ADDR_WIDTH -1 downto 0);  
+          addr: in  std_logic_vector(DATA_WIDTH -1 downto 0);  
           Wen : in  std_logic;    
           Datain: in  std_logic_vector(DATA_WIDTH -1 downto 0) := (others => '0'); 
           Ren : in  std_logic;    
@@ -99,19 +98,19 @@ architecture behav of cpu is
           );
       end component;
 
-    signal address : std_logic_vector(15 downto 0);
+    signal address : std_logic_vector(DATA_WIDTH - 1 downto 0);
     signal imm :  std_logic_vector(7 downto 0);
-    signal OPr2 :   std_logic_vector(15 downto 0);--noi datapath oi mux cua control
+    signal OPr2 :   std_logic_vector(DATA_WIDTH - 1 downto 0);--noi datapath oi mux cua control
     signal Mre :  std_logic;
     signal Mwe :  std_logic;
-    signal data_out_mem : std_logic_vector(15 downto 0); -- noi voi input3 datapath va ir_in 
-    signal data_in_mem :  std_logic_vector(15 downto 0); -- tuong duong data out cua datapath
+    signal data_out_mem : std_logic_vector(DATA_WIDTH - 1 downto 0); -- noi voi input3 datapath va ir_in 
+    signal data_in_mem :  std_logic_vector(DATA_WIDTH - 1 downto 0); -- tuong duong data out cua datapath
     signal RFs :  STD_LOGIC_VECTOR(1 downto 0);
-    signal RFwa :  STD_LOGIC_VECTOR(4 - 1 downto 0);
+    signal RFwa :  STD_LOGIC_VECTOR(ADDR_WIDTH- 1 downto 0);
     signal RFwe :  STD_LOGIC;
-    signal OPr1a :  STD_LOGIC_VECTOR(4 - 1 downto 0);
+    signal OPr1a :  STD_LOGIC_VECTOR(ADDR_WIDTH- 1 downto 0);
     signal OPr1e :  STD_LOGIC;
-    signal OPr2a :  STD_LOGIC_VECTOR(4 - 1 downto 0);
+    signal OPr2a :  STD_LOGIC_VECTOR(ADDR_WIDTH- 1 downto 0);
     signal OPr2e :  STD_LOGIC;
     signal ALUs :  STD_LOGIC_VECTOR(1 downto 0);
     signal ALUz : STD_LOGIC;
@@ -120,16 +119,11 @@ architecture behav of cpu is
     signal  PC_clr :  STD_LOGIC;
     signal  PC_ld :  STD_LOGIC;
     signal  IR_ld :  STD_LOGIC;
-    signal  op :  STD_LOGIC_VECTOR(3 downto 0);
+    signal  op :  STD_LOGIC_VECTOR(ADDR_WIDTH -1 downto 0);
      
 begin
     ctrl: control_unit
-      port
-      --  map(reset,clk,ALUz,OPr2,data_out_mem,RFs,RFwa,
-      -- RFwe,OPr1a,OPr1e,Opr2a,OPr2e,ALUs,address,Mre,Mwe,imm,add_ms,
-      -- PC_inc,PC_clr,PC_ld,IR_ld);
-      --  
-      map (
+      port map (
         reset=>reset,
         clk=>clk,
         ALUz=>ALUz,
@@ -155,10 +149,7 @@ begin
         op=>op);
 
     data:datapath
-      port 
-      -- map(reset,clk,imm,data_out_mem,RFs,ALUs,ALUz,RFwa,RFwe,
-      -- OPr1a,OPr1e,Opr2a,OPr2e,OPr2,data_in_mem);
-        map ( 
+      port  map ( 
           rst =>reset,
           clk =>clk,
           imm =>imm,
@@ -177,9 +168,7 @@ begin
         );
 
     mem :memory
-      port 
-      -- map(clk,reset,address,Mwe,data_in_mem,Mre,data_out_mem);
-      map  (
+      port map  (
           Clk => Clk,
           Reset => Reset,
           addr => address,
