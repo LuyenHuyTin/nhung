@@ -1,101 +1,109 @@
+-- Nguyen Kiem Hung
+-- datapath for microprocessor
 
 library IEEE;
-use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.std_logic_1164.all;
+use IEEE.std_logic_arith.all;
 
-entity Datapath is
+entity datapath is
+  Generic (
+    DATA_WIDTH : integer   := 16;     -- Data Width
+    ADDR_WIDTH : integer   := 4     -- Address width
+    );
+   port ( -- you will need to add more ports here as design grows
+          rst     : in STD_LOGIC;
+          clk     : in STD_LOGIC;
+          --
+        --w0 <=> ALUr
+	        imm     : in std_logic_vector(7 downto 0); -- w1 <=> imm
+	        w2      : in std_logic_vector(DATA_WIDTH -1 downto 0); -- w2 <=> data_out
+          RFs : in std_logic_vector(1 downto 0);
 
-	GENERIC(DATA_WIDTH: integer := 16; ADDR_WIDTH: integer := 16);
-    Port(  clk : in STD_LOGIC;
-           reset : in STD_LOGIC;
-           RFs : in STD_LOGIC_VECTOR (1 downto 0);
-           data_in1: in STD_LOGIC_VECTOR (DATA_WIDTH - 1 downto 0);
-           data_in2: in STD_LOGIC_VECTOR (DATA_WIDTH - 1 downto 0);
-           RFwa : in STD_LOGIC_VECTOR (ADDR_WIDTH - 1 downto 0);
-           RFwe : in STD_LOGIC;
-           OPr1a : in STD_LOGIC_VECTOR (ADDR_WIDTH - 1 downto 0);
-           OPr1e : in STD_LOGIC;
-           OPr2a : in STD_LOGIC_VECTOR (ADDR_WIDTH - 1 downto 0);
-           OPr2e : in STD_LOGIC;
-           ALUs : in STD_LOGIC_VECTOR (1 downto 0);
-           ALUz : out STD_LOGIC;
-           data_out1 : out STD_LOGIC_VECTOR (15 downto 0);
-           data_out2 : out STD_LOGIC_VECTOR (15 downto 0));
-end Datapath;
-
-architecture Behavioral of Datapath is
-
-        SIGNAL data_in0_alur: STD_LOGIC_VECTOR (DATA_WIDTH - 1 downto 0);
-        SIGNAL OPr2: STD_LOGIC_VECTOR (DATA_WIDTH - 1 downto 0);
-        SIGNAL OPr1: STD_LOGIC_VECTOR (DATA_WIDTH - 1 downto 0);
-        SIGNAL RFin : STD_LOGIC_VECTOR (DATA_WIDTH - 1 downto 0);
-
-        component registor_tt --datapath registor
-        Port ( reset : in STD_LOGIC;
-           clk : in STD_LOGIC;
-           RFin : in STD_LOGIC_VECTOR (DATA_WIDTH - 1 downto 0);
-           RFwa : in STD_LOGIC_VECTOR (ADDR_WIDTH - 1 downto 0);
-           RFwe : in STD_LOGIC;
-           OPr1a : in STD_LOGIC_VECTOR (ADDR_WIDTH - 1 downto 0);
-           OPr1e : in STD_LOGIC;
-           OPr2a : in STD_LOGIC_VECTOR (ADDR_WIDTH - 1 downto 0);
-           OPr2e : in STD_LOGIC;
-           OPr1 : out STD_LOGIC_VECTOR (DATA_WIDTH - 1 downto 0);
-           OPr2 : out STD_LOGIC_VECTOR (DATA_WIDTH - 1 downto 0));
-
-        end component;
-
-
-        component Mux_tt
-        port(data_in0, data_in1, data_in2 : in STD_LOGIC_VECTOR (DATA_WIDTH - 1 downto 0);
-            sel : in STD_LOGIC_VECTOR (1 downto 0);
-            data_out : out STD_LOGIC_VECTOR (DATA_WIDTH - 1 downto 0)
+          --
+        ALUs : in std_logic_vector(1 downto 0);
+        ALUz : out std_logic;
+        --
+      RFwa : in std_logic_vector(3 downto 0);
+      RFwe : in std_logic;
+      OPr1a : in std_logic_vector(3 downto 0);
+      OPr1e : in std_logic;
+      OPr2a : in std_logic_vector(3 downto 0);
+      OPr2e : in std_logic;
+      add_out : out std_logic_vector(15 downto 0);
+      data_out : out std_logic_vector(15 downto 0)
+      -- de test alu
+      --ALU_out : out std_logic_vector(15 downto 0)
         );
-        end component;
+end datapath;
 
-        component ALU_tt --datapath component
-        Port ( OPr1 : in STD_LOGIC_VECTOR (DATA_WIDTH - 1 downto 0);
-            OPr2 : in STD_LOGIC_VECTOR(DATA_WIDTH - 1 downto 0);
-            ALUs : in STD_LOGIC_VECTOR (1 downto 0);
-            ALUr : out STD_LOGIC_VECTOR(DATA_WIDTH - 1 downto 0);
-            ALUz : out STD_LOGIC );
-        end component;
+architecture struct of datapath is
+  -- ALU
+  component alu 
+    port (
+        OPr1 : in std_logic_vector(15 downto 0);
+        OPr2 : in std_logic_vector(15 downto 0);
+        ALUs : in std_logic_vector(1 downto 0);
+        ALUz : out std_logic;
+        ALUr : out std_logic_vector(15 downto 0)
+    );
+end component;
+
+-- mux 4 -> 1 
+component mux4to1
+   GENERIC ( DATA_WIDTH : integer := 16);
+   PORT (w0, w1, w2, w3: IN  	std_logic_vector (DATA_WIDTH-1 downto 0);
+        SEL : IN 	 std_logic_vector (1 downto 0);
+        Z: OUT 	std_logic_vector (DATA_WIDTH-1 downto 0)
+               );
+END component;
+-- RF
+component register_file 
+  generic(
+      DATA_WIDTH : integer := 16;
+      ADDR_WIDTH : integer := 4
+  );
+  Port ( reset : in STD_LOGIC;
+         clk : in STD_LOGIC;
+         RFin : in STD_LOGIC_VECTOR (DATA_WIDTH - 1 downto 0);
+         RFwa : in STD_LOGIC_VECTOR (ADDR_WIDTH - 1 downto 0);
+         RFwe : in STD_LOGIC;
+         OPr1a : in STD_LOGIC_VECTOR (ADDR_WIDTH - 1 downto 0);
+         OPr1e : in STD_LOGIC;
+         OPr2a : in STD_LOGIC_VECTOR (ADDR_WIDTH - 1 downto 0);
+         OPr2e : in STD_LOGIC;
+         OPr1 : out STD_LOGIC_VECTOR (DATA_WIDTH - 1 downto 0);
+         OPr2 : out STD_LOGIC_VECTOR (DATA_WIDTH - 1 downto 0));
+end component;
 
 
+signal ALUr : std_logic_vector(15 downto 0);
+signal RFin : std_logic_vector(15 downto 0);
+signal w3 : std_logic_vector(15 downto 0) := x"0000";
+
+signal o1 : std_logic_vector(15 downto 0);
+signal o2 : std_logic_vector(15 downto 0);
+signal w1 : std_logic_vector(15 downto 0);
 
 begin
+-- write your code here
+  -- MUX_U: MUX4to1 port map(?);
+	w1 <= x"00"& imm;
+  mux : mux4to1
+  port map(ALUr, w1, w2, w3, RFs, RFin);
+  --RF_U: REG_FILE port map (?);
+  rf_u : register_file
+  port map(rst,clk,RFin,RFwa,RFwe,OPr1a,OPr1e,OPr2a,OPr2e,o1,o2);
+  --ALU_U: alu port map (?);
+  alu_u: ALU 
+  port map(o1,o2,ALUs,ALUz,ALUr);
 
-    uut_alu: ALU_tt  PORT MAP (
-        OPr1 => OPr1,
-        OPr2 => OPr2,
-        ALUs => ALUs,
-        ALUz => ALUz,
-        ALUr => data_in0_alur
+  add_out <= o2;
+  data_out <= o1;
+ -- ALU_out <= ALUr;
 
-    );
+  
 
-    uut_mux : Mux_tt PORT MAP(
-        data_in0      => data_in0_alur,
-        data_in1   => data_in1,
-        data_in2     => data_in2,
-        sel       => RFs,
-        data_out    => RFin
-    );
 
-    uut_registor: registor_tt PORT MAP(
-        reset => reset,
-        clk =>   clk,
-        RFin =>  RFin,
-        RFwa =>  RFwa,
-        RFwe =>  RFwe,
-        OPr1a => OPr1a,
-        OPr1e => OPr1e,
-        OPr2a => OPr2a,
-        OPr2e => OPr2e,
-        OPr1 =>  OPr1,
-        OPr2 =>  OPr2);
-    
-    data_out1 <= OPr1;
-    data_out2 <= OPr2;
-    
-END Behavioral;
+end struct;
+
 

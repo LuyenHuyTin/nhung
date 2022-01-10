@@ -1,68 +1,110 @@
-
-
 library ieee;
---use ieee.std_logic_arith.all;
 use ieee.std_logic_1164.all;
-use ieee.STD_LOGIC_UNSIGNED.all;
---use work.sys_definition.all;
- 
---use alu.all;
- 
-entity alu_tb is
-	GENERIC(DATA_WIDTH: integer := 16; ADDR_WIDTH: integer := 16);
-end alu_tb;
+use ieee.numeric_std.all;
 
- 
- 
-architecture behavior of alu_tb is
 
-  SIGNAL opr1_test:STD_LOGIC_VECTOR(DATA_WIDTH - 1 downto 0);
-  SIGNAL opr2_test:STD_LOGIC_VECTOR(DATA_WIDTH - 1 downto 0); 
-  SIGNAL alus_test:STD_LOGIC_VECTOR (1 downto 0);
-  SIGNAL alur_test:STD_LOGIC_VECTOR(DATA_WIDTH - 1 downto 0);
-  SIGNAL aluz_test:STD_LOGIC;
-  component alu --datapath component
-	Port (OPr1 : in STD_LOGIC_VECTOR(DATA_WIDTH - 1 downto 0);
-              OPr2 : in STD_LOGIC_VECTOR(DATA_WIDTH - 1 downto 0);
-              ALUs : in STD_LOGIC_VECTOR (1 downto 0);
-              ALUr : out STD_LOGIC_VECTOR(DATA_WIDTH - 1 downto 0);
-              ALUz : out STD_LOGIC );
-  end component; 
+entity cpu_tb is
+end cpu_tb;
 
-   
-   
-   
+architecture behav of cpu_tb is
+
+    component cpu
+        port(clk : in std_logic;
+            reset : in std_logic;
+            address_t : out std_logic_vector(15 downto 0);
+    
+             imm_t : out std_logic_vector(7 downto 0);
+             OPr2_t :  out std_logic_vector(15 downto 0);--noi datapath oi mux cua control
+            --
+             Mre_t :  out std_logic;
+             Mwe_t :  out std_logic;
+            --
+             data_out_mem_t :out std_logic_vector(15 downto 0); -- noi voi w2 datapath va ir_in 
+             data_in_mem_t :  out std_logic_vector(15 downto 0); -- tuong duong data out cua datapath
+            -- 
+             RFs_t : out STD_LOGIC_VECTOR(1 downto 0);
+             RFwa_t : out STD_LOGIC_VECTOR(4 - 1 downto 0);
+             RFwe_t : out STD_LOGIC;
+            --
+             OPr1a_t : out STD_LOGIC_VECTOR(4 - 1 downto 0);
+             OPr1e_t : out STD_LOGIC;
+             OPr2a_t : out STD_LOGIC_VECTOR(4 - 1 downto 0);
+             OPr2e_t : out STD_LOGIC;
+            --
+             ALUs_t : out STD_LOGIC_VECTOR(1 downto 0);
+             ALUz_t : out STD_LOGIC;
+             --de test
+             add_ms_t : out std_logic_vector(1 downto 0);
+             PC_inc_t : out STD_LOGIC;
+             PC_clr_t : out STD_LOGIC;
+             PC_ld_t : out STD_LOGIC;
+             IR_ld_t : out STD_LOGIC;
+     
+             op_t : out STD_LOGIC_VECTOR(3 downto 0)
+        );
+       
+    
+    end component;
+
+    constant clk_period : time := 20 ns;
+
+    signal clk : std_logic := '1';
+    signal reset : std_logic := '1';
+    --
+    
+
+    --
+    signal address_t : std_logic_vector(15 downto 0);
+    
+    signal imm_t :  std_logic_vector(7 downto 0);
+    signal OPr2_t :   std_logic_vector(15 downto 0);--noi datapath oi mux cua control
+--
+    signal Mre_t :  std_logic;
+    signal Mwe_t :  std_logic;
+--
+    signal data_out_mem_t : std_logic_vector(15 downto 0); -- noi voi w2 datapath va ir_in 
+    signal data_in_mem_t :   std_logic_vector(15 downto 0); -- tuong duong data out cua datapath
+
+-- 
+    signal RFs_t :  STD_LOGIC_VECTOR(1 downto 0);
+    signal RFwa_t :  STD_LOGIC_VECTOR(4 - 1 downto 0);
+    signal RFwe_t :  STD_LOGIC;
+--
+    signal OPr1a_t : STD_LOGIC_VECTOR(4 - 1 downto 0);
+    signal OPr1e_t :  STD_LOGIC;
+    signal OPr2a_t :  STD_LOGIC_VECTOR(4 - 1 downto 0);
+    signal OPr2e_t :  STD_LOGIC;
+--
+    signal ALUs_t :  STD_LOGIC_VECTOR(1 downto 0);
+    signal ALUz_t :  STD_LOGIC;
+    --
+    signal  add_ms_t :  std_logic_vector(1 downto 0);
+     signal  PC_inc_t :  STD_LOGIC;
+     signal  PC_clr_t :  STD_LOGIC;
+     signal  PC_ld_t :  STD_LOGIC;
+     signal  IR_ld_t :  STD_LOGIC;
+
+     signal  op_t :  STD_LOGIC_VECTOR(3 downto 0);
+
 begin
-   
--- UUT componenet
-  dut:  alu
-    port map (     
-      OPr1      => opr1_test,
-      OPr2   => opr2_test,
-      ALUs     => alus_test,
-      ALUr       => alur_test,
-      ALUz    => aluz_test   
-      );
-   
--- Read process
 
-  stimuli_proc :  process
-  Begin
-      -- Reset generation
-  	opr1_test <= "1010010100110111";
-	opr2_test <= "0011011010010111";
-	alus_test <= "00";
-	wait for 20 ns;
-	alus_test <= "01";
-	wait for 20 ns;
-	alus_test <= "10";
-	wait for 20 ns;
-	alus_test <= "11";
-	wait for 20 ns;
+    clk <= not clk after clk_period / 2;
 
-        
-  end process stimuli_proc;
-   
- 
+    DUT : cpu
+    port map (clk,reset,address_t,imm_t,OPr2_t,
+    Mre_t,Mwe_t,data_out_mem_t,data_in_mem_t,RFs_t,RFwa_t,
+    RFwe_t,OPr1a_t,OPr1e_t,OPr2a_t,OPr2e_t,ALUs_t,ALUz_t,add_ms_t,
+    PC_inc_t,PC_clr_t,PC_ld_t,IR_ld_t,op_t);
 
-end behavior;
+    SEQUENCER_PROC : process
+    begin
+        reset <= '1';
+        wait for clk_period * 2;
+
+        reset <= '0';
+
+        wait for clk_period * 30;
+
+    end process;
+
+end behav;

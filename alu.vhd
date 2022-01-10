@@ -1,43 +1,52 @@
-library IEEE;
-use IEEE.STD_LOGIC_1164.ALL;
-use IEEE.STD_LOGIC_UNSIGNED.ALL;
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+use ieee.std_logic_unsigned.all;
+entity alu is
+    port (
+        OPr1 : in std_logic_vector(15 downto 0);
+        OPr2 : in std_logic_vector(15 downto 0);
+        ALUs : in std_logic_vector(1 downto 0);
+        ALUz : out std_logic;
+        ALUr : out std_logic_vector(15 downto 0)
+    );
+end alu;
 
-entity ALU is
-GENERIC(DATA_WIDTH : integer := 16); -- khai bao bien 
-
-    Port ( OPr1 : in STD_LOGIC_VECTOR
-	 (DATA_WIDTH - 1 downto 0);
-          OPr2 : in STD_LOGIC_VECTOR
-	 (DATA_WIDTH - 1 downto 0);
-           ALUs : in STD_LOGIC_VECTOR (1downto 0);
-           ALUr : out STD_LOGIC_VECTOR
-	  (DATA_WIDTH - 1 downto 0);
-           ALUz : out STD_LOGIC
-        );
-end ALU;
-architecture ALU of ALU is
-signal
-result : STD_LOGIC_VECTOR(DATA_WIDTH - 1 downto 0);
+architecture behav of alu is
+    component mux4to1
+    GENERIC ( 
+             DATA_WIDTH : integer := 16);
+    PORT (w0, w1, w2, w3: IN  std_logic_vector (DATA_WIDTH-1 downto 0);
+         SEL : IN 	std_logic_vector (1 downto 0);
+         Z: OUT std_logic_vector (DATA_WIDTH-1 downto 0)
+                );
+    END component;
+ signal a : std_logic_vector(16 - 1 downto 0) := x"0000";
+ signal b : std_logic_vector(16 - 1 downto 0) := x"0000";
+ signal w0 : std_logic_vector(16 - 1 downto 0) ;
+ signal w1 : std_logic_vector(16 - 1 downto 0) ;
+ signal w2 : std_logic_vector(16 - 1 downto 0) ;
+ signal w3 : std_logic_vector(16 - 1 downto 0) ;
+--  signal ALUs : std_logic_vector(1 downto 0) ;
+--  signal ALUz : std_logic;
+--  signal ALUr : std_logic_vector(DATA_WIDTH downto 0);
 begin
-    process(ALUs, Opr1, Opr2) -- process se hoat dong khi 1 trong 3 cong dau vao thay doi
-    begin
-        case(ALUs) is
-            when "00" =>
-                result <= OPr1 + OPr2;
-            when "01" => 
-                result <= OPr1 - OPr2;
-            when "10" =>
-                result <= OPr1 or OPr2;
-            when "11" =>
-                result <= OPr1 and OPr2;
-          
-            when others => 
-                result <= (others =>'1');
-        end case;
-    end process;
-    ALUr <= result;
-    ALUz <= '1' when OPr1 = x"0000"
-	 else '0';
-end
-ALU;
+    mux : mux4to1
+    port map(
+        w0 => w0,
+        w1 => w1,
+        w2 => w2,
+        w3 => w3,
+        SEL => ALUs,
+        Z => ALUr
+    );
+    a <= OPr1;
+    b <= Opr2;
+    w0 <= a+b;
+    w1 <= a - b;
+    w2 <= a or b;
+    w3 <= a and b;
+    ALUz <= '1' when  OPr1 = X"0000" else
+            '0';    
 
+end behav;

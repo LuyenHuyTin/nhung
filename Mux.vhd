@@ -1,18 +1,24 @@
-library IEEE;
-use IEEE.STD_LOGIC_1164.ALL;
 
-entity Mux_tt is
-GENERIC(DATA_WIDTH : integer := 16);
-    port(data_in0, data_in1, data_in2 : in STD_LOGIC_VECTOR (DATA_WIDTH - 1 downto 0);
-    	sel : in STD_LOGIC_VECTOR (1 downto 0);
-    	data_out : out STD_LOGIC_VECTOR (DATA_WIDTH - 1 downto 0)
-    );
-end Mux_tt;
-architecture Mux_tt of Mux_tt is
-begin
+library IEEE;
+use IEEE.std_logic_1164.all;
+USE ieee.numeric_std.all ;
+--use IEEE.std_logic_arith.all;
+use IEEE.std_logic_unsigned.all;
+--use work.Sys_Definition.all;
+
+ENTITY mux4to1 IS
+   GENERIC ( DATA_WIDTH : integer := 16);
+   PORT (w0, w1, w2, w3: IN  std_logic_vector (DATA_WIDTH-1 downto 0);
+        SEL : IN 	 std_logic_vector (1 downto 0);
+        Z: OUT 	std_logic_vector (DATA_WIDTH-1 downto 0));
+END mux4to1;
+ARCHITECTURE bev OF mux4to1 IS
+BEGIN
+    -- write your code here
     with sel select
-        data_out <= data_in0 when "00",
-                    data_in1 when "01",
-                    data_in2 when others;
-end Mux_tt;
+    z <= w0 when "00",
+        w1 when "01",
+        w2 when "10",
+        w3 when others;
+END bev;
 

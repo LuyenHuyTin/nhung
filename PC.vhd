@@ -1,42 +1,38 @@
+library ieee;
+use ieee.std_logic_1164.all;
+--use ieee.numeric_std.all;
+use ieee.std_logic_unsigned.all;
+entity pc is
+        port (
+            -- control pc
+            clk : in std_logic;
+            PCclr : in std_logic;
+            PCinc : in std_logic;
+            PCld : in std_logic;
 
-library IEEE;
-use IEEE.STD_LOGIC_1164.ALL;
-use IEEE.STD_LOGIC_UNSIGNED.ALL;
+            -- data in out of pc
+            PCd_in : in std_logic_vector(7 downto 0);
+            PCd_out : out std_logic_vector(15 downto 0)
+        );
+end pc;
 
-entity program_counter is
-    Port (I_clk : in  STD_LOGIC;
-			I_reset : in  STD_LOGIC;
-			I_halt : in  STD_LOGIC;
-			
-			I_int: in STD_LOGIC;
-			O_int_ack: out STD_LOGIC;
-
-			-- new memory interface
-			MEM_I_ready : IN  std_logic;
-			MEM_O_cmd : OUT  std_logic;
-			MEM_O_we : OUT  std_logic;
-			MEM_O_byteEnable : OUT  std_logic_vector(1 downto 0);
-			MEM_O_addr : OUT  std_logic_vector(15 downto 0);
-			MEM_O_data : OUT  std_logic_vector(15 downto 0);
-			MEM_I_data : IN  std_logic_vector(15 downto 0);
-			MEM_I_dataReady : IN  std_logic
-	);
-end program_counter;
-
-architecture program_counter of program_counter is
-signal PC_reg: STD_LOGIC_VECTOR (15 downto 0);
+architecture behav of pc is
+    signal data : std_logic_vector(15 downto 0);
 begin
-    process(clk, PCclr)
+    pc_pro : process(clk,PCclr)
     begin
-       if PCclr = '1' then
-                PC_reg <= (others => '0');
-       elsif clk'event and clk = '1' then
-            if PCld = '1' then
-                PC_reg <= PC_in;
-            elsif PCincr = '1' then
-                PC_reg <= PC_reg + 1;
+        if(PCclr = '1') then 
+            data <= X"0000";
+        elsif(clk='1'and clk'event) then
+            if(PCld = '1') then
+                data <= X"00" & PCd_in;
+            end if;
+            if(PCinc = '1') then
+                data <= data + "1";
             end if;
         end if;
+
+
     end process;
-    PC_out <= PC_reg;       
-end program_counter;
+    PCd_out <= data;
+end behav;
