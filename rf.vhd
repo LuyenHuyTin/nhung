@@ -1,45 +1,44 @@
-library IEEE;
-use IEEE.STD_LOGIC_1164.ALL;
-use IEEE.STD_LOGIC_UNSIGNED.ALL;
-
-
-entity register_file is
-    generic(
-        DATA_WIDTH : integer := 16;
-        ADDR_WIDTH : integer := 4
+LIBRARY IEEE;
+USE IEEE.STD_LOGIC_1164.ALL;
+USE IEEE.STD_LOGIC_UNSIGNED.ALL;
+ENTITY register_file IS
+    GENERIC (
+        DATA_WIDTH : INTEGER := 16;
+        ADDR_WIDTH : INTEGER := 4
     );
-    Port ( reset : in STD_LOGIC;
-           clk : in STD_LOGIC;
-           RFin : in STD_LOGIC_VECTOR (DATA_WIDTH - 1 downto 0);
-           RFwa : in STD_LOGIC_VECTOR (ADDR_WIDTH - 1 downto 0);
-           RFwe : in STD_LOGIC;
-           OPr1a : in STD_LOGIC_VECTOR (ADDR_WIDTH - 1 downto 0);
-           OPr1e : in STD_LOGIC;
-           OPr2a : in STD_LOGIC_VECTOR (ADDR_WIDTH - 1 downto 0);
-           OPr2e : in STD_LOGIC;
-           OPr1 : out STD_LOGIC_VECTOR (DATA_WIDTH - 1 downto 0);
-           OPr2 : out STD_LOGIC_VECTOR (DATA_WIDTH - 1 downto 0));
-end register_file;
-architecture register_file of register_file is
-    type DATA_ARRAY is array (integer range<>) of STD_LOGIC_VECTOR(16 - 1 downto 0);
-    signal RF : DATA_ARRAY(0 to 15) := (others => (others => '0')); 
-begin
-    RW_Proc: process(clk, reset)
-    begin
-        if reset = '1' then
-            OPr1 <= (others => '0');
-            OPr2 <= (others=> '0');
-            RF <= (others=> (others => '0'));
-        elsif clk'event and clk = '1' then
-            if RFwe = '1' then
+    PORT (
+        reset : IN STD_LOGIC;
+        clk : IN STD_LOGIC;
+        RFin : IN STD_LOGIC_VECTOR (DATA_WIDTH - 1 DOWNTO 0);
+        RFwa : IN STD_LOGIC_VECTOR (ADDR_WIDTH - 1 DOWNTO 0);
+        RFwe : IN STD_LOGIC;
+        OPr1a : IN STD_LOGIC_VECTOR (ADDR_WIDTH - 1 DOWNTO 0);
+        OPr1e : IN STD_LOGIC;
+        OPr2a : IN STD_LOGIC_VECTOR (ADDR_WIDTH - 1 DOWNTO 0);
+        OPr2e : IN STD_LOGIC;
+        OPr1 : OUT STD_LOGIC_VECTOR (DATA_WIDTH - 1 DOWNTO 0);
+        OPr2 : OUT STD_LOGIC_VECTOR (DATA_WIDTH - 1 DOWNTO 0));
+END register_file;
+ARCHITECTURE register_file OF register_file IS
+    TYPE DATA_ARRAY IS ARRAY (INTEGER RANGE <>) OF STD_LOGIC_VECTOR(16 - 1 DOWNTO 0);
+    SIGNAL RF : DATA_ARRAY(0 TO 15) := (OTHERS => (OTHERS => '0'));
+BEGIN
+    RW_Proc : PROCESS (clk, reset)
+    BEGIN
+        IF reset = '1' THEN
+            OPr1 <= (OTHERS => '0');
+            OPr2 <= (OTHERS => '0');
+            RF <= (OTHERS => (OTHERS => '0'));
+        ELSIF clk'event AND clk = '1' THEN
+            IF RFwe = '1' THEN
                 RF(conv_integer(RFwa)) <= RFin;
-            end if;
-            if OPr1e = '1' then
+            END IF;
+            IF OPr1e = '1' THEN
                 OPr1 <= RF(conv_integer(OPr1a));
-            end if;
-            if OPr2e = '1' then
+            END IF;
+            IF OPr2e = '1' THEN
                 OPr2 <= RF(conv_integer(OPr2a));
-            end if;
-        end if;
-    end process RW_Proc;
-end register_file;
+            END IF;
+        END IF;
+    END PROCESS RW_Proc;
+END register_file;

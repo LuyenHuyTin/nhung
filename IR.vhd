@@ -1,26 +1,26 @@
-library ieee;
-use ieee.std_logic_1164.all;
-use ieee.numeric_std.all;
+LIBRARY ieee;
+USE ieee.std_logic_1164.ALL;
+USE ieee.numeric_std.ALL;
 
-entity ir is
-    port (
-        clk : in std_logic;
-        IRld : in std_logic;
-        IRin : in std_logic_vector(15 downto 0);
-        IRout : out std_logic_vector(15 downto 0)
+ENTITY ir IS
+    PORT (
+        clk : IN STD_LOGIC;
+        IRld : IN STD_LOGIC;
+        IRin : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
+        IRout : OUT STD_LOGIC_VECTOR(15 DOWNTO 0)
     );
-end ir;
+END ir;
 
-architecture behav of ir is
-signal data : std_logic_vector(15 downto 0);
-begin
-    ir_pro : process(clk)
-    begin
-        if(clk ='1' and clk'event) then
-            if(IRld = '1') then 
+ARCHITECTURE behav OF ir IS
+    SIGNAL data : STD_LOGIC_VECTOR(15 DOWNTO 0);
+BEGIN
+    ir_pro : PROCESS (clk)
+    BEGIN
+        IF (clk = '1' AND clk'event) THEN
+            IF (IRld = '1') THEN
                 data <= IRin;
-            end if;
-        end if;
-    end process;
+            END IF;
+        END IF;
+    END PROCESS;
     IRout <= data;
-end behav;
+END behav;

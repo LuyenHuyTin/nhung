@@ -1,38 +1,36 @@
-library ieee;
-use ieee.std_logic_1164.all;
-use ieee.numeric_std.all;
-use ieee.std_logic_unsigned.all;
-entity alu is
-    port (
-        OPr1 : in std_logic_vector(15 downto 0);
-        OPr2 : in std_logic_vector(15 downto 0);
-        ALUs : in std_logic_vector(1 downto 0);
-        ALUz : out std_logic;
-        ALUr : out std_logic_vector(15 downto 0)
+LIBRARY ieee;
+USE ieee.std_logic_1164.ALL;
+USE ieee.numeric_std.ALL;
+USE ieee.std_logic_unsigned.ALL;
+ENTITY alu IS
+    PORT (
+        OPr1 : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
+        OPr2 : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
+        ALUs : IN STD_LOGIC_VECTOR(1 DOWNTO 0);
+        ALUz : OUT STD_LOGIC;
+        ALUr : OUT STD_LOGIC_VECTOR(15 DOWNTO 0)
     );
-end alu;
+END alu;
 
-architecture behav of alu is
-    component mux
-    GENERIC ( 
-             DATA_WIDTH : integer := 16);
-    PORT (input1, input2, input3, input4: IN  std_logic_vector (DATA_WIDTH-1 downto 0);
-         SELECTION : IN 	std_logic_vector (1 downto 0);
-         Z: OUT std_logic_vector (DATA_WIDTH-1 downto 0)
-                );
-    END component;
- signal a : std_logic_vector(16 - 1 downto 0) := x"0000";
- signal b : std_logic_vector(16 - 1 downto 0) := x"0000";
- signal input1 : std_logic_vector(16 - 1 downto 0) ;
- signal input2 : std_logic_vector(16 - 1 downto 0) ;
- signal input3 : std_logic_vector(16 - 1 downto 0) ;
- signal input4 : std_logic_vector(16 - 1 downto 0) ;
---  signal ALUs : std_logic_vector(1 downto 0) ;
---  signal ALUz : std_logic;
---  signal ALUr : std_logic_vector(DATA_WIDTH downto 0);
-begin
+ARCHITECTURE behav OF alu IS
+    COMPONENT mux
+        GENERIC (
+            DATA_WIDTH : INTEGER := 16);
+        PORT (
+            input1, input2, input3, input4 : IN STD_LOGIC_VECTOR (DATA_WIDTH - 1 DOWNTO 0);
+            SELECTION : IN STD_LOGIC_VECTOR (1 DOWNTO 0);
+            Z : OUT STD_LOGIC_VECTOR (DATA_WIDTH - 1 DOWNTO 0)
+        );
+    END COMPONENT;
+    SIGNAL num1 : STD_LOGIC_VECTOR(16 - 1 DOWNTO 0) := x"0000";
+    SIGNAL num2 : STD_LOGIC_VECTOR(16 - 1 DOWNTO 0) := x"0000";
+    SIGNAL input1 : STD_LOGIC_VECTOR(16 - 1 DOWNTO 0);
+    SIGNAL input2 : STD_LOGIC_VECTOR(16 - 1 DOWNTO 0);
+    SIGNAL input3 : STD_LOGIC_VECTOR(16 - 1 DOWNTO 0);
+    SIGNAL input4 : STD_LOGIC_VECTOR(16 - 1 DOWNTO 0);
+BEGIN
     uut_mux : mux
-    port map(
+    PORT MAP(
         input1 => input1,
         input2 => input2,
         input3 => input3,
@@ -40,13 +38,13 @@ begin
         SELECTION => ALUs,
         Z => ALUr
     );
-    a <= OPr1;
-    b <= Opr2;
-    input1 <= a+b;
-    input2 <= a - b;
-    input3 <= a or b;
-    input4 <= a and b;
-    ALUz <= '1' when  OPr1 = X"0000" else
-            '0';    
+    num1 <= OPr1;
+    num2 <= Opr2;
+    input1 <= num1 + num2b;
+    input2 <= num1 - num2;
+    input3 <= num1 OR num2;
+    input4 <= num1 AND num2;
+    ALUz <= '1' WHEN OPr1 = X"0000" ELSE
+        '0';
 
-end behav;
+END behav;

@@ -1,217 +1,212 @@
-library ieee;
-use ieee.std_logic_1164.all;
-use ieee.numeric_std.all;
+LIBRARY ieee;
+USE ieee.std_logic_1164.ALL;
+USE ieee.numeric_std.ALL;
 
-entity cpu is
-    Generic (
-            DATA_WIDTH : integer   := 16; 
-            ADDR_WIDTH : integer   := 4 );
-    port(
-        clk : in std_logic;
-        reset : in std_logic;
-        address_t : out std_logic_vector(DATA_WIDTH - 1 downto 0);
-        imm_t : out std_logic_vector(7 downto 0);
-        OPr2_t :  out std_logic_vector(DATA_WIDTH - 1 downto 0);
-        Mre_t :  out std_logic;
-        Mwe_t :  out std_logic;
-        data_out_mem_t :out std_logic_vector(DATA_WIDTH - 1 downto 0); 
-        data_in_mem_t :  out std_logic_vector(DATA_WIDTH - 1 downto 0); 
-        RFs_t : out STD_LOGIC_VECTOR(1 downto 0);
-        RFwa_t : out STD_LOGIC_VECTOR(ADDR_WIDTH- 1 downto 0);
-        RFwe_t : out STD_LOGIC;
-        OPr1a_t : out STD_LOGIC_VECTOR(ADDR_WIDTH- 1 downto 0);
-        OPr1e_t : out STD_LOGIC;
-        OPr2a_t : out STD_LOGIC_VECTOR(ADDR_WIDTH- 1 downto 0);
-        OPr2e_t : out STD_LOGIC;
-        ALUs_t : out STD_LOGIC_VECTOR(1 downto 0);
-        ALUz_t : out STD_LOGIC;
-        add_ms_t : out std_logic_vector(1 downto 0);
-        PC_inc_t : out STD_LOGIC;
-        PC_clr_t : out STD_LOGIC;
-        PC_ld_t : out STD_LOGIC;
-        IR_ld_t : out STD_LOGIC;
-        op_t : out STD_LOGIC_VECTOR(ADDR_WIDTH -1 downto 0)
+ENTITY cpu IS
+  GENERIC (
+    DATA_WIDTH : INTEGER := 16;
+    ADDR_WIDTH : INTEGER := 4);
+  PORT (
+    clk : IN STD_LOGIC;
+    reset : IN STD_LOGIC;
+    address_t : OUT STD_LOGIC_VECTOR(DATA_WIDTH - 1 DOWNTO 0);
+    imm_t : OUT STD_LOGIC_VECTOR(7 DOWNTO 0);
+    OPr2_t : OUT STD_LOGIC_VECTOR(DATA_WIDTH - 1 DOWNTO 0);
+    Mre_t : OUT STD_LOGIC;
+    Mwe_t : OUT STD_LOGIC;
+    data_out_mem_t : OUT STD_LOGIC_VECTOR(DATA_WIDTH - 1 DOWNTO 0);
+    data_in_mem_t : OUT STD_LOGIC_VECTOR(DATA_WIDTH - 1 DOWNTO 0);
+    RFs_t : OUT STD_LOGIC_VECTOR(1 DOWNTO 0);
+    RFwa_t : OUT STD_LOGIC_VECTOR(ADDR_WIDTH - 1 DOWNTO 0);
+    RFwe_t : OUT STD_LOGIC;
+    OPr1a_t : OUT STD_LOGIC_VECTOR(ADDR_WIDTH - 1 DOWNTO 0);
+    OPr1e_t : OUT STD_LOGIC;
+    OPr2a_t : OUT STD_LOGIC_VECTOR(ADDR_WIDTH - 1 DOWNTO 0);
+    OPr2e_t : OUT STD_LOGIC;
+    ALUs_t : OUT STD_LOGIC_VECTOR(1 DOWNTO 0);
+    ALUz_t : OUT STD_LOGIC;
+    add_ms_t : OUT STD_LOGIC_VECTOR(1 DOWNTO 0);
+    PC_inc_t : OUT STD_LOGIC;
+    PC_clr_t : OUT STD_LOGIC;
+    PC_ld_t : OUT STD_LOGIC;
+    IR_ld_t : OUT STD_LOGIC;
+    op_t : OUT STD_LOGIC_VECTOR(ADDR_WIDTH - 1 DOWNTO 0)
+  );
+END cpu;
+
+ARCHITECTURE behav OF cpu IS
+  --control unit
+  COMPONENT control_unit
+    PORT (
+      reset : IN STD_LOGIC;
+      clk : IN STD_LOGIC;
+      ALUz : IN STD_LOGIC;
+      addr_in : IN STD_LOGIC_VECTOR(DATA_WIDTH - 1 DOWNTO 0);
+      ir_data_in : IN STD_LOGIC_VECTOR(DATA_WIDTH - 1 DOWNTO 0);
+      RFs : OUT STD_LOGIC_VECTOR(1 DOWNTO 0);
+      RFwa : OUT STD_LOGIC_VECTOR(ADDR_WIDTH - 1 DOWNTO 0);
+      RFwe : OUT STD_LOGIC;
+      OPr1a : OUT STD_LOGIC_VECTOR(ADDR_WIDTH - 1 DOWNTO 0);
+      OPr1e : OUT STD_LOGIC;
+      OPr2a : OUT STD_LOGIC_VECTOR(ADDR_WIDTH - 1 DOWNTO 0);
+      OPr2e : OUT STD_LOGIC;
+      ALUs : OUT STD_LOGIC_VECTOR(1 DOWNTO 0);
+      ADDR : OUT STD_LOGIC_VECTOR(DATA_WIDTH - 1 DOWNTO 0);
+      Mre : OUT STD_LOGIC;
+      Mwe : OUT STD_LOGIC;
+      imm : OUT STD_LOGIC_VECTOR(8 - 1 DOWNTO 0);
+      add_ms : OUT STD_LOGIC_VECTOR(1 DOWNTO 0);
+      PC_inc : OUT STD_LOGIC;
+      PC_clr : OUT STD_LOGIC;
+      PC_ld : OUT STD_LOGIC;
+      IR_ld : OUT STD_LOGIC;
+      op : OUT STD_LOGIC_VECTOR(ADDR_WIDTH - 1 DOWNTO 0)
     );
-   
+  END COMPONENT;
 
-end cpu;
+  COMPONENT datapath
+    PORT (
+      rst : IN STD_LOGIC;
+      clk : IN STD_LOGIC;
+      imm : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
+      input3 : IN STD_LOGIC_VECTOR(DATA_WIDTH - 1 DOWNTO 0);
+      RFs : IN STD_LOGIC_VECTOR(1 DOWNTO 0);
+      ALUs : IN STD_LOGIC_VECTOR(1 DOWNTO 0);
+      ALUz : OUT STD_LOGIC;
+      RFwa : IN STD_LOGIC_VECTOR(ADDR_WIDTH - 1 DOWNTO 0);
+      RFwe : IN STD_LOGIC;
+      OPr1a : IN STD_LOGIC_VECTOR(ADDR_WIDTH - 1 DOWNTO 0);
+      OPr1e : IN STD_LOGIC;
+      OPr2a : IN STD_LOGIC_VECTOR(ADDR_WIDTH - 1 DOWNTO 0);
+      OPr2e : IN STD_LOGIC;
+      opr2_out : OUT STD_LOGIC_VECTOR(DATA_WIDTH - 1 DOWNTO 0);
+      opr1_out : OUT STD_LOGIC_VECTOR(DATA_WIDTH - 1 DOWNTO 0));
+  END COMPONENT;
 
-architecture behav of cpu is
-    --control unit
-    component control_unit 
-        port (
-          reset : in STD_LOGIC; 
-          clk : in STD_LOGIC; 
-          ALUz : in STD_LOGIC;
-          addr_in : in STD_LOGIC_VECTOR(DATA_WIDTH- 1 downto 0);
-          ir_data_in : in STD_LOGIC_VECTOR(DATA_WIDTH- 1 downto 0);
-          RFs : out STD_LOGIC_VECTOR(1 downto 0);
-          RFwa : out STD_LOGIC_VECTOR(ADDR_WIDTH - 1 downto 0);
-          RFwe : out STD_LOGIC;
-          OPr1a : out STD_LOGIC_VECTOR(ADDR_WIDTH - 1 downto 0);
-          OPr1e : out STD_LOGIC;
-          OPr2a : out STD_LOGIC_VECTOR(ADDR_WIDTH - 1 downto 0);
-          OPr2e : out STD_LOGIC;
-          ALUs : out STD_LOGIC_VECTOR(1 downto 0);
-          ADDR : out STD_LOGIC_VECTOR(DATA_WIDTH- 1 downto 0);
-          Mre : out STD_LOGIC;
-          Mwe : out STD_LOGIC;
-          imm : out STD_LOGIC_VECTOR(8 - 1 downto 0);
-          add_ms : out std_logic_vector(1 downto 0);
-          PC_inc : out STD_LOGIC;
-          PC_clr : out STD_LOGIC;
-          PC_ld : out STD_LOGIC;
-          IR_ld : out STD_LOGIC;
-          op : out STD_LOGIC_VECTOR(ADDR_WIDTH -1 downto 0)
-        );
-       end component;
+  -- memory
+  COMPONENT memory
+    PORT (
+      Clk : IN STD_LOGIC;
+      Reset : IN STD_LOGIC;
+      addr : IN STD_LOGIC_VECTOR(DATA_WIDTH - 1 DOWNTO 0);
+      Wen : IN STD_LOGIC;
+      Datain : IN STD_LOGIC_VECTOR(DATA_WIDTH - 1 DOWNTO 0) := (OTHERS => '0');
+      Ren : IN STD_LOGIC;
+      Dataout : OUT STD_LOGIC_VECTOR(DATA_WIDTH - 1 DOWNTO 0)
+    );
+  END COMPONENT;
 
-       component datapath 
-         port ( 
-            rst     : in STD_LOGIC;
-            clk     : in STD_LOGIC;
-            imm     : in std_logic_vector(7 downto 0); 
-            input3      : in std_logic_vector(DATA_WIDTH -1 downto 0);
-            RFs : in std_logic_vector(1 downto 0);
-            ALUs : in std_logic_vector(1 downto 0);
-            ALUz : out std_logic;
-            RFwa : in std_logic_vector(ADDR_WIDTH -1 downto 0);
-            RFwe : in std_logic;
-            OPr1a : in std_logic_vector(ADDR_WIDTH -1 downto 0);
-            OPr1e : in std_logic;
-            OPr2a : in std_logic_vector(ADDR_WIDTH -1 downto 0);
-            OPr2e : in std_logic;
-            add_out : out std_logic_vector(DATA_WIDTH - 1 downto 0);
-            data_out : out std_logic_vector(DATA_WIDTH - 1 downto 0));
-      end component;
+  SIGNAL OPr1e : STD_LOGIC;
+  SIGNAL OPr2a : STD_LOGIC_VECTOR(ADDR_WIDTH - 1 DOWNTO 0);
+  SIGNAL OPr2e : STD_LOGIC;
+  SIGNAL ALUs : STD_LOGIC_VECTOR(1 DOWNTO 0);
+  SIGNAL ALUz : STD_LOGIC;
+  SIGNAL add_ms : STD_LOGIC_VECTOR(1 DOWNTO 0);
+  SIGNAL PC_inc : STD_LOGIC;
+  SIGNAL PC_clr : STD_LOGIC;
+  SIGNAL PC_ld : STD_LOGIC;
+  SIGNAL RFs : STD_LOGIC_VECTOR(1 DOWNTO 0);
+  SIGNAL RFwa : STD_LOGIC_VECTOR(ADDR_WIDTH - 1 DOWNTO 0);
+  SIGNAL RFwe : STD_LOGIC;
+  SIGNAL OPr1a : STD_LOGIC_VECTOR(ADDR_WIDTH - 1 DOWNTO 0);
+  SIGNAL IR_ld : STD_LOGIC;
+  SIGNAL op : STD_LOGIC_VECTOR(ADDR_WIDTH - 1 DOWNTO 0);
+  SIGNAL address : STD_LOGIC_VECTOR(DATA_WIDTH - 1 DOWNTO 0);
+  SIGNAL imm : STD_LOGIC_VECTOR(7 DOWNTO 0);
+  SIGNAL OPr2 : STD_LOGIC_VECTOR(DATA_WIDTH - 1 DOWNTO 0);
+  SIGNAL Mre : STD_LOGIC;
+  SIGNAL Mwe : STD_LOGIC;
+  SIGNAL data_out_mem : STD_LOGIC_VECTOR(DATA_WIDTH - 1 DOWNTO 0);
+  SIGNAL data_in_mem : STD_LOGIC_VECTOR(DATA_WIDTH - 1 DOWNTO 0);
+BEGIN
+  ctrl : control_unit
+  PORT MAP(
+    reset => reset,
+    clk => clk,
+    ALUz => ALUz,
+    addr_in => OPr2,
+    ir_data_in => data_out_mem,
+    RFs => RFs,
+    RFwa => RFwa,
+    RFwe => RFwe,
+    OPr1a => OPr1a,
+    OPr1e => OPr1e,
+    OPr2a => OPr2a,
+    OPr2e => OPr2e,
+    ALUs => ALUs,
+    ADDR => address,
+    Mre => Mre,
+    Mwe => Mwe,
+    imm => imm,
+    add_ms => add_ms,
+    PC_inc => PC_inc,
+    PC_clr => PC_clr,
+    PC_ld => PC_ld,
+    IR_ld => IR_ld,
+    op => op);
 
-      -- memory
-      component memory 
-        port (
-          Clk: in  std_logic;       
-          Reset : in  std_logic; 
-          addr: in  std_logic_vector(DATA_WIDTH -1 downto 0);  
-          Wen : in  std_logic;    
-          Datain: in  std_logic_vector(DATA_WIDTH -1 downto 0) := (others => '0'); 
-          Ren : in  std_logic;    
-          Dataout: out std_logic_vector(DATA_WIDTH -1 downto 0)  
-          );
-      end component;
+  data : datapath
+  PORT MAP(
+    rst => reset,
+    clk => clk,
+    imm => imm,
+    input3 => data_out_mem,
+    RFs => RFs,
+    ALUs => ALUs,
+    ALUz => ALUz,
+    RFwa => RFwa,
+    RFwe => RFwe,
+    OPr1a => OPr1a,
+    OPr1e => OPr1e,
+    OPr2a => OPr2a,
+    OPr2e => OPr2e,
+    opr2_out => OPr2,
+    opr1_out => data_in_mem
+  );
 
-    signal address : std_logic_vector(DATA_WIDTH - 1 downto 0);
-    signal imm :  std_logic_vector(7 downto 0);
-    signal OPr2 :   std_logic_vector(DATA_WIDTH - 1 downto 0);--noi datapath oi mux cua control
-    signal Mre :  std_logic;
-    signal Mwe :  std_logic;
-    signal data_out_mem : std_logic_vector(DATA_WIDTH - 1 downto 0); -- noi voi input3 datapath va ir_in 
-    signal data_in_mem :  std_logic_vector(DATA_WIDTH - 1 downto 0); -- tuong duong data out cua datapath
-    signal RFs :  STD_LOGIC_VECTOR(1 downto 0);
-    signal RFwa :  STD_LOGIC_VECTOR(ADDR_WIDTH- 1 downto 0);
-    signal RFwe :  STD_LOGIC;
-    signal OPr1a :  STD_LOGIC_VECTOR(ADDR_WIDTH- 1 downto 0);
-    signal OPr1e :  STD_LOGIC;
-    signal OPr2a :  STD_LOGIC_VECTOR(ADDR_WIDTH- 1 downto 0);
-    signal OPr2e :  STD_LOGIC;
-    signal ALUs :  STD_LOGIC_VECTOR(1 downto 0);
-    signal ALUz : STD_LOGIC;
-    signal  add_ms :  std_logic_vector(1 downto 0);
-    signal  PC_inc :  STD_LOGIC;
-    signal  PC_clr :  STD_LOGIC;
-    signal  PC_ld :  STD_LOGIC;
-    signal  IR_ld :  STD_LOGIC;
-    signal  op :  STD_LOGIC_VECTOR(ADDR_WIDTH -1 downto 0);
-     
-begin
-    ctrl: control_unit
-      port map (
-        reset=>reset,
-        clk=>clk,
-        ALUz=>ALUz,
-        addr_in=>OPr2,
-        ir_data_in=>data_out_mem,
-        RFs=>RFs,
-        RFwa=>RFwa,
-        RFwe=>RFwe,
-        OPr1a=>OPr1a,
-        OPr1e=>OPr1e,
-        OPr2a=>OPr2a,
-        OPr2e=>OPr2e,
-        ALUs=>ALUs,
-        ADDR=>address,
-        Mre=>Mre,
-        Mwe=>Mwe,
-        imm=>imm,
-        add_ms=>add_ms,
-        PC_inc=>PC_inc,
-        PC_clr=>PC_clr,
-        PC_ld=>PC_ld,
-        IR_ld=>IR_ld,
-        op=>op);
+  mem : memory
+  PORT MAP(
+    Clk => Clk,
+    Reset => Reset,
+    addr => address,
+    Wen => Mwe,
+    Datain => data_in_mem,
+    Ren => Mre,
+    Dataout => data_out_mem);
+  address_t <= address;
+  Mre_t <= Mre;
+  Mwe_t <= Mwe;
+  data_out_mem_t <= data_out_mem;
+  data_in_mem_t <= data_in_mem;
 
-    data:datapath
-      port  map ( 
-          rst =>reset,
-          clk =>clk,
-          imm =>imm,
-          input3 =>data_out_mem,
-          RFs =>RFs,
-          ALUs =>ALUs,
-          ALUz =>ALUz,
-          RFwa =>RFwa,
-          RFwe =>RFwe,
-          OPr1a =>OPr1a,
-          OPr1e =>OPr1e,
-          OPr2a =>OPr2a,
-          OPr2e =>OPr2e,
-          add_out =>OPr2,
-          data_out =>data_in_mem
-        );
+  --
+  imm_t <= imm;
+  OPr2_t <= OPr2;--noi datapath oi mux cua control
+  --
+  Mre_t <= Mre;
+  Mwe_t <= Mwe;
+  --
+  data_out_mem_t <= data_out_mem; -- noi voi input3 datapath va ir_in 
+  data_in_mem_t <= data_in_mem; -- tuong duong data out cua datapath
+  -- 
+  RFs_t <= RFs;
+  RFwa_t <= RFwa;
+  RFwe_t <= RFwe;
+  --
+  OPr1a_t <= OPr1a;
+  OPr1e_t <= OPr1e;
+  OPr2a_t <= OPr2a;
+  OPr2e_t <= OPr2e;
+  --
+  ALUs_t <= ALUs;
+  ALUz_t <= ALUz;
+  --
+  add_ms_t <= add_ms;
+  PC_inc_t <= PC_inc;
+  PC_clr_t <= PC_clr;
+  PC_ld_t <= PC_ld;
+  IR_ld_t <= IR_ld;
 
-    mem :memory
-      port map  (
-          Clk => Clk,
-          Reset => Reset,
-          addr => address,
-          Wen => Mwe,
-          Datain => data_in_mem,
-          Ren => Mre,
-          Dataout => data_out_mem);
+  op_t <= op;
 
-
-    address_t <= address ;
-    Mre_t <= Mre;
-    Mwe_t <= Mwe;
-    data_out_mem_t <= data_out_mem;
-    data_in_mem_t <= data_in_mem;
-
-    --
-    imm_t <= imm ;
-    OPr2_t <= OPr2;--noi datapath oi mux cua control
-   --
-    Mre_t <= Mre ;
-    Mwe_t <= Mwe ;
-   --
-    data_out_mem_t <= data_out_mem; -- noi voi input3 datapath va ir_in 
-    data_in_mem_t <= data_in_mem; -- tuong duong data out cua datapath
-   -- 
-    RFs_t <= RFs;
-    RFwa_t <= RFwa;
-    RFwe_t <= RFwe;
-   --
-    OPr1a_t <= OPr1a;
-    OPr1e_t <= OPr1e;
-    OPr2a_t <= OPr2a;
-    OPr2e_t <= OPr2e;
-   --
-    ALUs_t <= ALUs;
-    ALUz_t <= ALUz;
-    --
-    add_ms_t <=add_ms;
-    PC_inc_t <= PC_inc;
-    PC_clr_t <=PC_clr;
-    PC_ld_t <=PC_ld;
-    IR_ld_t <=IR_ld;
-
-    op_t <= op;
-
-end behav;
+END behav;

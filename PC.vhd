@@ -1,32 +1,32 @@
-library ieee;
-use ieee.std_logic_1164.all;
-use ieee.std_logic_unsigned.all;
-entity pc is
-        port (
-            clk : in std_logic;
-            PCclr : in std_logic;
-            PCinc : in std_logic;
-            PCld : in std_logic;
-            PCd_in : in std_logic_vector(7 downto 0);
-            PCd_out : out std_logic_vector(15 downto 0)
-        );
-end pc;
+LIBRARY ieee;
+USE ieee.std_logic_1164.ALL;
+USE ieee.std_logic_unsigned.ALL;
+ENTITY pc IS
+    PORT (
+        clk : IN STD_LOGIC;
+        PCclr : IN STD_LOGIC;
+        PCinc : IN STD_LOGIC;
+        PCld : IN STD_LOGIC;
+        PCd_in : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
+        PCd_out : OUT STD_LOGIC_VECTOR(15 DOWNTO 0)
+    );
+END pc;
 
-architecture pc_behav of pc is
-    signal data : std_logic_vector(15 downto 0);
-begin
-    pc_pro : process(clk,PCclr)
-    begin
-        if(PCclr = '1') then 
+ARCHITECTURE pc_behav OF pc IS
+    SIGNAL data : STD_LOGIC_VECTOR(15 DOWNTO 0);
+BEGIN
+    pc_pro : PROCESS (clk, PCclr)
+    BEGIN
+        IF (PCclr = '1') THEN
             data <= X"0000";
-        elsif(clk='1'and clk'event) then
-            if(PCld = '1') then
+        ELSIF (clk = '1'AND clk'event) THEN
+            IF (PCld = '1') THEN
                 data <= X"00" & PCd_in;
-            end if;
-            if(PCinc = '1') then
+            END IF;
+            IF (PCinc = '1') THEN
                 data <= data + "1";
-            end if;
-        end if;
-    end process;
+            END IF;
+        END IF;
+    END PROCESS;
     PCd_out <= data;
-end pc_behav;
+END pc_behav;
